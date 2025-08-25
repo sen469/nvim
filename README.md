@@ -1,3 +1,4 @@
+```
 .
 ├── README.md
 ├── init.lua
@@ -32,3 +33,4 @@
         └── rust.lua
 
 4 directories, 28 files
+```
