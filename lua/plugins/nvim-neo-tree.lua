@@ -9,7 +9,8 @@ return {
   config = function()
     require("neo-tree").setup({
       filesystem = {
-        follow_current_file = true, -- 現在開いているファイルにフォーカス
+        -- follow_current_file = true, -- 現在開いているファイルにフォーカス
+        follow_current_file = { enable = true }, -- 現在開いているファイルにフォーカス
         hijack_netrw_behavior = "open_default", -- netrwの代わりにneo-treeを使う
         filtered_items = {
           visible = false, -- trueにすると .gitignore されたものも表示
