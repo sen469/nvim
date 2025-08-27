@@ -68,11 +68,6 @@ ls.add_snippets("cpp", {
 
 	s("else", t({"else", ""})),
 	s("else if", t({"else if", ""})),
-	s("do", t({"do", ""})),
-
-	s("rep", {
-		t("rep("), i(1, "i"), t(", "), i(2, "start"), t(", "), i(3, "end"), t(")")
-	}),
 
 	s("UF", {
 		t({
