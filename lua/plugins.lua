@@ -19,6 +19,7 @@ return {
   require("plugins.dap"),
   require("plugins.42-header"),
   require("plugins.restore-cursor"),
+  require("plugins.bufferline"),
 
   -- git管理--------------------------------------------------------------
   -- vim-fugitive

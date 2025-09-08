@@ -29,6 +29,20 @@ vim.keymap.set("n", "cpal", ":%y<CR>") -- copy all
 -- clr で空にする
 vim.keymap.set("n", "clr", ":%d<CR>") -- clear
 
+-- 次のバッファ / 前のバッファ
+vim.keymap.set("n", "<Tab>", "<cmd>BufferLineCycleNext<CR>", { silent = true })
+vim.keymap.set("n", "<S-Tab>", "<cmd>BufferLineCyclePrev<CR>", { silent = true })
+
+-- バッファを閉じる
+vim.keymap.set("n", "<leader>bd", "<cmd>bdelete<CR>", { silent = true })
+
+-- 番号指定でバッファに移動
+vim.keymap.set("n", "<leader>1", "<cmd>BufferLineGoToBuffer 1<CR>", { silent = true })
+vim.keymap.set("n", "<leader>2", "<cmd>BufferLineGoToBuffer 2<CR>", { silent = true })
+vim.keymap.set("n", "<leader>3", "<cmd>BufferLineGoToBuffer 3<CR>", { silent = true })
+vim.keymap.set("n", "<leader>4", "<cmd>BufferLineGoToBuffer 4<CR>", { silent = true })
+vim.keymap.set("n", "<leader>5", "<cmd>BufferLineGoToBuffer 5<CR>", { silent = true })
+
 -- '\m'で行末の^Mを削除
 vim.keymap.set("n", "<leader>m", ":%s/\\r//g<CR>")
 -- debug関係

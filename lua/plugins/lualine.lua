@@ -2,6 +2,10 @@ return {
     'nvim-lualine/lualine.nvim',
     dependencies = { 'nvim-tree/nvim-web-devicons' },
     config = function()
+        local function clock()
+            return os.date("%H:%M")
+        end
+
         require('lualine').setup {
             options = {
                 icons_enabled = true,
@@ -27,7 +31,7 @@ return {
                 lualine_b = { 'branch', 'diff', 'diagnostics' },
                 lualine_c = { 'filename' },
                 lualine_x = { 'encoding', 'fileformat', 'filetype' },
-                lualine_y = { 'progress' },
+                lualine_y = { 'progress', clock },
                 lualine_z = { 'location' }
             },
             inactive_sections = {
