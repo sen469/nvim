@@ -32,3 +32,9 @@ require('keymaps')
 
 -- Node.js のパスを設定
 vim.g.coc_node_path = '/usr/bin/node'
+--
+-- YAMLファイルを開いた時だけ、タブをスペースに変換する設定を有効にする
+vim.api.nvim_create_autocmd({ "FileType" }, {
+  pattern = { "yaml" },
+  command = "setlocal expandtab",
+})

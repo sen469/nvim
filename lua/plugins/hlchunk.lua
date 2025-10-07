@@ -18,6 +18,7 @@ return {
             "h", 
 			"c",
 			"hpp",
+			"js",
         }, -- サポートするファイルタイプ
         chars = {
           horizontal_line = "─",

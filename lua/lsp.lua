@@ -6,7 +6,7 @@ local lspconfig = require("lspconfig")
 
 mason.setup()
 mason_lspconfig.setup({
-  ensure_installed = {"clangd", "pyright", "rust_analyzer" },
+  ensure_installed = {"clangd", "pyright", "rust_analyzer", "ts_ls", "html", "cssls" },
 })
 
 local on_attach = function(client, bufnr)
@@ -29,21 +29,17 @@ mason_lspconfig.setup_handlers({
   end,
 
   -- clangd のカスタム設定
-  ["clangd"] = function()
-    lspconfig.clangd.setup({
-      -- ▼▼▼ ここから修正 ▼▼▼
-      cmd = {
-        "clangd",
-        "--query-driver=/opt/homebrew/bin/g++", -- Homebrewのg++を指定
-      },
-      -- ▲▲▲ ここまで修正 ▲▲▲
-      on_attach = on_attach,
-      capabilities = capabilities,
-      flags = {
-        debounce_text_changes = 150,
-      },
-    })
-  end,
+-- .config/nvim/lua/lsp.lua
+
+["clangd"] = function()
+        lspconfig.clangd.setup({
+          on_attach = on_attach,
+          capabilities = capabilities,
+          flags = {
+            debounce_text_changes = 150,
+          },
+        })
+      end,
 
   -- rust_analyzer のカスタム設定
   ["rust_analyzer"] = function()
