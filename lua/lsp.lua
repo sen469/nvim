@@ -1,4 +1,4 @@
--- lua/lspconfig.lua
+-- lua/lsp.lua
 
 local mason = require("mason")
 local mason_lspconfig = require("mason-lspconfig")
@@ -6,7 +6,7 @@ local lspconfig = require("lspconfig")
 
 mason.setup()
 mason_lspconfig.setup({
-  ensure_installed = {"clangd", "pyright", "rust_analyzer" },
+  ensure_installed = {"clangd", "pyright", "rust_analyzer", "matlab_ls" },
 })
 
 local on_attach = function(client, bufnr)
@@ -28,24 +28,22 @@ mason_lspconfig.setup_handlers({
     })
   end,
 
-  -- clangd のカスタム設定
   ["clangd"] = function()
-    lspconfig.clangd.setup({
-      -- ▼▼▼ ここから修正 ▼▼▼
-      cmd = {
-        "clangd",
-        "--query-driver=/opt/homebrew/bin/g++", -- Homebrewのg++を指定
-      },
-      -- ▲▲▲ ここまで修正 ▲▲▲
-      on_attach = on_attach,
-      capabilities = capabilities,
-      flags = {
-        debounce_text_changes = 150,
-      },
-    })
-  end,
+        lspconfig.clangd.setup({
+          on_attach = on_attach,
+          capabilities = capabilities,
 
-  -- rust_analyzer のカスタム設定
+          cmd = {
+            "/Users/sen46/.local/share/nvim/mason/packages/clangd/clangd_21.1.0/bin/clangd",
+            "--compile-commands-dir=/Users/sen46/.config/clangd",
+          },
+
+          flags = {
+            debounce_text_changes = 150,
+          },
+        })
+      end,
+
   ["rust_analyzer"] = function()
     lspconfig.rust_analyzer.setup({
       on_attach = on_attach,
@@ -73,9 +71,25 @@ mason_lspconfig.setup_handlers({
       },
     })
   end,
+
+  -- matlab_ls の設定
+  ["matlab_ls"] = function()
+    lspconfig.matlab_ls.setup({
+      on_attach = on_attach,
+      capabilities = capabilities,
+      settings = {
+        -- 1. キーを大文字の 'MATLAB' に統一
+        MATLAB = {
+          installPath = "/Applications/MATLAB_R2025a.app"
+        }
+      },
+      -- 2. Git管理外のファイルでもLSPを起動させる
+      single_file_support = true,
+    })
+  end,
 })
 
--- ▼▼▼ 診断機能の設定（ハンドラテーブルの外に移動） ▼▼▼
+-- ▼▼▼ 診断機能の設定 ▼▼▼
 vim.diagnostic.config({
   virtual_text = {
     prefix = "●",
@@ -90,12 +104,12 @@ vim.diagnostic.config({
 vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
   vim.lsp.handlers.hover,
   {
-    border = "rounded",  -- ほかに "single", "double", "shadow" もあり
-    max_width = 80,      -- 幅が広すぎて読みにくいのを防ぐ
+    border = "rounded",
+    max_width = 80,
   }
 )
 
 -- (オプション) ポップアップメニューの背景も同様に設定
 vim.cmd('highlight link Pmenu Normal')
-vim.api.nvim_set_hl(0, "NormalFloat", { link = "Normal" })      -- 背景色を通常と揃える
-vim.api.nvim_set_hl(0, "FloatBorder", { link = "Comment" })     -- 枠線をコメント色に
+vim.api.nvim_set_hl(0, "NormalFloat", { link = "Normal" })
+vim.api.nvim_set_hl(0, "FloatBorder", { link = "Comment" })
