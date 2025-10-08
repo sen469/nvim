@@ -46,7 +46,8 @@ vim.keymap.set("n", "<leader>4", "<cmd>BufferLineGoToBuffer 4<CR>", { silent = t
 vim.keymap.set("n", "<leader>5", "<cmd>BufferLineGoToBuffer 5<CR>", { silent = true })
 
 -- ^M を削除
-vim.keymap.set("n", "<leader>m", ":%s/\\r//g<CR>")
+-- WSLのときのみ必要
+-- vim.keymap.set("n", "<leader>m", ":%s/\\r//g<CR>")
 
 -- Debug (DAP)
 local dap = require("dap")
