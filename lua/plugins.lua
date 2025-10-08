@@ -23,6 +23,7 @@ return {
   require("plugins.comment"),
   require("plugins.dial"),
   require("plugins.treesj"),
+  require("plugins.nvim-ts-autotag"),
 
   -- git管理--------------------------------------------------------------
   -- vim-fugitive
