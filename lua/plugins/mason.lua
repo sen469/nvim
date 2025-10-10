@@ -7,7 +7,7 @@ return {
   config = function()
     require("mason").setup()
     require("mason-lspconfig").setup({
-      ensure_installed = { "clangd", "pyright", "tsserver", "rust_analyzer", "matlab_ls"  },
+      ensure_installed = { "clangd", "pyright", "ts_ls", "rust_analyzer", "matlab_ls"  },
     })
   end
 }

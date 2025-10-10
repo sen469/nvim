@@ -6,7 +6,7 @@ local lspconfig = require("lspconfig")
 
 mason.setup()
 mason_lspconfig.setup({
-  ensure_installed = {"clangd", "pyright", "rust_analyzer", "matlab_ls" },
+  ensure_installed = {"clangd", "pyright", "rust_analyzer", "matlab_ls", "ts_ls" },
 })
 
 local on_attach = function(client, bufnr)
