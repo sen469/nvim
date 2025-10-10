@@ -20,6 +20,9 @@ return {
   require("plugins.42-header"),
   require("plugins.restore-cursor"),
   require("plugins.bufferline"),
+  require("plugins.comment"),
+  require("plugins.dial"),
+  require("plugins.autotag"),
 
   -- git管理--------------------------------------------------------------
   -- vim-fugitive
