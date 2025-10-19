@@ -1,3 +1,4 @@
+-- nvim/lua/plugins/treesitter.lua
 return {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
@@ -9,8 +10,8 @@ return {
             highlight = {
                 enable = true,
 				disable = {
-					'cpp',
-					'c',
+					-- 'cpp',
+					-- 'c',
 				},
                 -- ここを false にすると、Vim のハイライト（=カラースキーム）が優先される
                 -- additional_vim_regex_highlighting = true,
@@ -18,6 +19,17 @@ return {
             },
             indent = { enable = false },
             fold = { enable = true },
+            
+            -- ▼▼▼ ここを修正 ▼▼▼
+            -- rainbow モジュールを無効にする
+            -- (HiPhish/rainbow-delimiters.nvim を優先するため)
+            rainbow = {
+                enable = false, -- true から false に変更
+                -- extended_mode = false, 
+                -- max_file_lines = nil, 
+                -- colors = { ... },
+            }
+            -- ▲▲▲ ここまで修正 ▲▲▲
         })
 
         vim.opt.foldmethod = "expr"

@@ -24,6 +24,7 @@ return {
   require("plugins.dial"),
   require("plugins.treesj"),
   require("plugins.nvim-ts-autotag"),
+  require("plugins.rainbow-delimiters"),
 
   -- git管理--------------------------------------------------------------
   -- vim-fugitive
