@@ -31,6 +31,8 @@ ls.add_snippets("cpp", {
 			"using vvb = vector<vb>;",
 			"using vd = vector<double>;",
 			"using vvd = vector<vd>;",
+			"template <typename T> bool chmin(T &a,T b){if(a>b){a=b;return true;} return false;}",
+			"template <typename T> bool chmax(T &a,T b){if(a<b){a=b;return true;} return false;}",
 			"",
 			"",
 			"int main()",
