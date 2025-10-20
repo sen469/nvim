@@ -23,6 +23,7 @@ return {
   require("plugins.comment"),
   require("plugins.dial"),
   require("plugins.autotag"),
+  require("plugins.rainbow-delimiters"),
 
   -- git管理--------------------------------------------------------------
   -- vim-fugitive
