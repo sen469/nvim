@@ -7,7 +7,7 @@ return {
     vim.cmd.colorscheme("one_monokai")
 
     -- 透明度を設定 (背景を none にする)
-    vim.api.nvim_set_hl(0, "Normal", { bg = "#282C34" })
+    vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
     vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
 
     -- 編集している行をうっすら強調
