@@ -61,3 +61,15 @@ vim.keymap.set("n", "<Leader>b", function() dap.toggle_breakpoint() end, { desc 
 vim.keymap.set("n", "<Leader>B", function() dap.set_breakpoint(vim.fn.input("Condition: ")) end, { desc = "条件付きブレークポイント" })
 vim.keymap.set("n", "<Leader>dr", function() dap.repl.open() end, { desc = "デバッグREPL" })
 vim.keymap.set("n", "<Leader>du", function() dapui.toggle() end, { desc = "DAP UI切替" })
+
+-- 直前の文字列を大文字に変換してくれる
+vim.keymap.set("i", "<C-l>",
+    function()
+        local line = vim.fn.getline(".")
+        local col = vim.fn.getpos(".")[3]
+        local substring = line:sub(1, col - 1)
+        local result = vim.fn.matchstr(substring, [[\v<(\k(<)@!)*$]])
+        return "<C-w>" .. result:upper()
+    end,
+    {expr = true}
+)
