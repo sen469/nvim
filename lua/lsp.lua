@@ -20,7 +20,6 @@ end
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 mason_lspconfig.setup_handlers({
-  -- 他のLSPサーバー用のデフォルト設定
   function(server_name)
     lspconfig[server_name].setup({
       on_attach = on_attach,
@@ -29,21 +28,36 @@ mason_lspconfig.setup_handlers({
   end,
 
   ["clangd"] = function()
-        lspconfig.clangd.setup({
-          on_attach = on_attach,
-          capabilities = capabilities,
+    local util = require("lspconfig.util")
 
-          cmd = {
-            "/Users/sen46/.local/share/nvim/mason/packages/clangd/clangd_21.1.0/bin/clangd",
-            "--compile-commands-dir=/Users/sen46/.config/clangd",
-          },
+    lspconfig.clangd.setup({
+      on_attach = on_attach,
+      capabilities = capabilities,
 
-          flags = {
-            debounce_text_changes = 150,
-          },
-        })
-      end,
+      cmd = (function()
+        local root_dir = util.root_pattern("compile_commands.json", ".git")(vim.fn.getcwd())
+        local default_dir = "/Users/sen46/.config/clangd"
 
+        local compile_dir
+        if root_dir and vim.fn.filereadable(root_dir .. "/compile_commands.json") == 1 then
+          compile_dir = root_dir
+        else
+          compile_dir = default_dir
+        end
+
+        return {
+          "/Users/sen46/.local/share/nvim/mason/packages/clangd/clangd_21.1.0/bin/clangd",
+          "--compile-commands-dir=" .. compile_dir,
+        }
+      end)(),
+
+      flags = {
+        debounce_text_changes = 150,
+      },
+    })
+  end,
+
+  -- ▼▼▼ Rust ▼▼▼
   ["rust_analyzer"] = function()
     lspconfig.rust_analyzer.setup({
       on_attach = on_attach,
@@ -72,24 +86,22 @@ mason_lspconfig.setup_handlers({
     })
   end,
 
-  -- matlab_ls の設定
+  -- ▼▼▼ MATLAB ▼▼▼
   ["matlab_ls"] = function()
     lspconfig.matlab_ls.setup({
       on_attach = on_attach,
       capabilities = capabilities,
       settings = {
-        -- 1. キーを大文字の 'MATLAB' に統一
         MATLAB = {
           installPath = "/Applications/MATLAB_R2025a.app"
         }
       },
-      -- 2. Git管理外のファイルでもLSPを起動させる
       single_file_support = true,
     })
   end,
 })
 
--- ▼▼▼ 診断機能の設定 ▼▼▼
+-- ▼▼▼ 診断表示の設定 ▼▼▼
 vim.diagnostic.config({
   virtual_text = {
     prefix = "●",
@@ -100,7 +112,7 @@ vim.diagnostic.config({
   severity_sort = true,
 })
 
--- LSP hover ウィンドウの外観を調整する
+-- ▼▼▼ Hover ウィンドウの見た目 ▼▼▼
 vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
   vim.lsp.handlers.hover,
   {
@@ -109,7 +121,7 @@ vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
   }
 )
 
--- (オプション) ポップアップメニューの背景も同様に設定
+-- ▼▼▼ ポップアップメニューの配色 ▼▼▼
 vim.cmd('highlight link Pmenu Normal')
 vim.api.nvim_set_hl(0, "NormalFloat", { link = "Normal" })
 vim.api.nvim_set_hl(0, "FloatBorder", { link = "Comment" })
