@@ -2,6 +2,8 @@ local ls = require("luasnip")
 local s = ls.snippet
 local t = ls.text_node
 local i = ls.insert_node
+local fmt = require("luasnip.extras.fmt").fmt
+
 ls.add_snippets("cpp", {
 	s("kyopuro", {
 		t({
@@ -58,6 +60,12 @@ ls.add_snippets("cpp", {
 
 	s("else", t({"else", ""})),
 	s("else if", t({"else if", ""})),
+	s("do", fmt([[
+	do
+	{{
+		{}
+	}} while ({});
+	]], { i(1), i(2) })),
 
 	s("UF", {
 		t({

@@ -31,7 +31,15 @@ return {
                 lualine_b = { 'branch', 'diff', 'diagnostics' },
                 lualine_c = { 'filename' },
                 lualine_x = { 'encoding', 'fileformat', 'filetype' },
-                lualine_y = { 'progress', clock },
+                lualine_y = 
+                {
+                    'progress',
+                    {
+                        clock,
+                        color = { fg = '#1E1E1E', bg = '#F5A9B8' },
+                        separator = { left = '', right = '' },
+                    },
+                },
                 lualine_z = { 'location' }
             },
             inactive_sections = {
