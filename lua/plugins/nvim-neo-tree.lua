@@ -14,7 +14,7 @@ return {
         filtered_items = {
           visible = false, -- trueにすると .gitignore されたものも表示
           hide_dotfiles = false, -- 隠しファイルを表示
-          hide_gitignored = false, -- gitignoreされたファイルを表示
+          hide_gitignored = true, -- gitignoreされたファイルを表示
           hide_by_name = { "node_modules" }, -- node_modulesを非表示
         },
       },
