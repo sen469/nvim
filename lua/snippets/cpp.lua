@@ -143,21 +143,20 @@ ls.add_snippets("cpp", {
 
 	s("sieve", {
 		t({
-			"vector<bool> IsPrime;",
-			"",
-			"void sieve(size_t max){",
-			"\tif(max+1 > IsPrime.size()){",
-			"\t\tIsPrime.resize(max+1,true);",
+			"vector<int> Eratosthenes(int N)",
+			"{",
+			"\tvector<int> isPrime(N + 5, 1);",
+			"\tisPrime[0] = isPrime[1] = 0;",
+			"\tfor (int p = 2; p <= N; p++)",
+			"\t{",
+			"\t\tif (isPrime[p])",
+			"\t\t{",
+			"\t\t\tfor (int q = 2 * p; q <= N; q += p)",
+			"\t\t\t\tisPrime[q] = 0;",
+			"\t\t}",
 			"\t}",
-			"\tIsPrime[0] = false;",
-			"\tIsPrime[1] = false;",
-			"",
-			"\tfor(size_t i = 2; i * i <= max; i++)",
-			"\t\tif(IsPrime[i])",
-			"\t\t\tfor(size_t j = 2; i * j <= max; j++)",
-			"\t\t\t\tIsPrime[i * j] = false;",
+			"\treturn (isPrime);",
 			"}",
-			"",
 		})
 	}),
 
