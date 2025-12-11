@@ -24,6 +24,7 @@ return {
   require("plugins.dial"),
   require("plugins.autotag"),
   require("plugins.rainbow-delimiters"),
+  require("plugins.nvim-surround"),
 
   -- git管理--------------------------------------------------------------
   -- vim-fugitive
