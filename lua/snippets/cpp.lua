@@ -47,6 +47,7 @@ ls.add_snippets("cpp", {
 		i(0),
 		t({
 			"",
+			"",
 			"\treturn (0);",
 			"}"
 		}),
