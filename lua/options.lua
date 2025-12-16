@@ -34,6 +34,7 @@ vim.opt.signcolumn = 'yes' -- 行番号の横に余白を確保（警告やGit�
 vim.opt.hidden = true -- 未保存のバッファを切り替え可能にする
 vim.opt.swapfile = false -- スワップファイルを生成しない
 vim.opt.cursorline = true -- 現在の行をハイライトにする
+vim.opt.cursorcolumn = true -- 現在の行をハイライトにする
 vim.opt.winblend = 20 -- ウィンドウの不透明度
 vim.opt.pumblend = 20 -- ポップアップメニューの不透明度
 

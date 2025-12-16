@@ -28,8 +28,9 @@ return {
     -- 2. カーソル行・現在行番号の強調 (重複によりこちらを採用)
     -- =========================================================================
     -- 編集している行をダークグレーで強調
-    vim.api.nvim_set_hl(0, "CursorLine", { bg = "#383E4A" })
-    
+    vim.api.nvim_set_hl(0, "CursorLine", { bg = "#4B5263" })
+    vim.api.nvim_set_hl(0, "CursorColumn", { bg = "#4B5263" })
+
     -- 現在行の行番号を黄色で強調
     vim.api.nvim_set_hl(0, "CursorLineNr", { fg = "#ffff80", bold = true })
 
