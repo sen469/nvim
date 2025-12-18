@@ -1,75 +1,83 @@
+-- keymaps.lua
+-- =========================================================
+-- 共通オプション
+local opts = { noremap = true, silent = true }
+
+-- =========================================================
 -- Telescope
-vim.keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { noremap = true, silent = true })
-vim.keymap.set("n", "<leader>fg", "<cmd>Telescope live_grep<cr>", { noremap = true, silent = true })
+local builtin = require("telescope.builtin")
 
--- 画面分割
-vim.keymap.set("n", "ss", ":split<Return><C-w>w")
-vim.keymap.set("n", "sv", ":vsplit<Return><C-w>w")
+vim.keymap.set("n", "<leader>ff", builtin.find_files, opts)
+vim.keymap.set("n", "<leader>fg", builtin.live_grep,  opts)
+vim.keymap.set("n", "<leader>fb", builtin.buffers,    opts)
+vim.keymap.set("n", "<leader>fh", builtin.help_tags,  opts)
 
--- アクティブウィンドウの移動
-vim.keymap.set("n", "sh", "<C-w>h")
-vim.keymap.set("n", "sk", "<C-w>k")
-vim.keymap.set("n", "sj", "<C-w>j")
-vim.keymap.set("n", "sl", "<C-w>l")
+-- =========================================================
+-- Window / Split 操作
+vim.keymap.set("n", "ss", ":split<CR><C-w>w", opts)
+vim.keymap.set("n", "sv", ":vsplit<CR><C-w>w", opts)
 
--- jkでEsc
+vim.keymap.set("n", "sh", "<C-w>h", opts)
+vim.keymap.set("n", "sj", "<C-w>j", opts)
+vim.keymap.set("n", "sk", "<C-w>k", opts)
+vim.keymap.set("n", "sl", "<C-w>l", opts)
+
+-- =========================================================
+-- Insert mode
 vim.keymap.set("i", "jk", "<Esc>")
 
--- 設定ファイルを開く
-vim.keymap.set("n", "<F1>", ":edit $MYVIMRC<CR>")
+-- =========================================================
+-- 設定ファイル
+vim.keymap.set("n", "<F1>", ":edit $MYVIMRC<CR>", opts)
 
--- ファイルツリー
-vim.keymap.set("n", "<leader>e", ":Neotree toggle<CR>")
+-- =========================================================
+-- File Tree (Neo-tree)
+vim.keymap.set("n", "<leader>e", ":Neotree toggle<CR>", opts)
 
--- 全選択コピー
-vim.keymap.set("n", "cpal", ":%y<CR>") -- copy all
+-- =========================================================
+-- 編集系ユーティリティ
+vim.keymap.set("n", "cpal", ":%y<CR>", opts) -- 全コピー
+vim.keymap.set("n", "clr",  ":%d<CR>", opts) -- 全削除
 
--- 全削除
-vim.keymap.set("n", "clr", ":%d<CR>") -- clear
+-- =========================================================
+-- Bufferline
+vim.keymap.set("n", "<Tab>",   "<cmd>BufferLineCycleNext<CR>", opts)
+vim.keymap.set("n", "<S-Tab>", "<cmd>BufferLineCyclePrev<CR>", opts)
 
--- 次/前のバッファ
-vim.keymap.set("n", "<Tab>", "<cmd>BufferLineCycleNext<CR>", { silent = true })
-vim.keymap.set("n", "<S-Tab>", "<cmd>BufferLineCyclePrev<CR>", { silent = true })
+vim.keymap.set("n", "<leader>bd", "<cmd>bdelete<CR>",              opts)
+vim.keymap.set("n", "<leader>bc", "<cmd>BufferLinePickClose<CR>",  opts)
+vim.keymap.set("n", "<leader>bo", "<cmd>BufferLineCloseOthers<CR>",opts)
+vim.keymap.set("n", "<leader>bl", "<cmd>BufferLineCloseLeft<CR>",  opts)
+vim.keymap.set("n", "<leader>br", "<cmd>BufferLineCloseRight<CR>", opts)
 
--- バッファを閉じる
-vim.keymap.set("n", "<leader>bd", "<cmd>bdelete<CR>", { silent = true })
-vim.keymap.set("n", "<leader>bc", "<cmd>BufferLinePickClose<CR>", { silent = true })   -- 選んで閉じる
-vim.keymap.set("n", "<leader>bo", "<cmd>BufferLineCloseOthers<CR>", { silent = true }) -- 他を全部閉じる
-vim.keymap.set("n", "<leader>bl", "<cmd>BufferLineCloseLeft<CR>", { silent = true })   -- 左を閉じる
-vim.keymap.set("n", "<leader>br", "<cmd>BufferLineCloseRight<CR>", { silent = true })  -- 右を閉じる
+-- バッファ番号指定
+for i = 1, 5 do
+  vim.keymap.set("n", "<leader>" .. i, "<cmd>BufferLineGoToBuffer " .. i .. "<CR>", opts)
+end
 
--- バッファ番号指定移動
-vim.keymap.set("n", "<leader>1", "<cmd>BufferLineGoToBuffer 1<CR>", { silent = true })
-vim.keymap.set("n", "<leader>2", "<cmd>BufferLineGoToBuffer 2<CR>", { silent = true })
-vim.keymap.set("n", "<leader>3", "<cmd>BufferLineGoToBuffer 3<CR>", { silent = true })
-vim.keymap.set("n", "<leader>4", "<cmd>BufferLineGoToBuffer 4<CR>", { silent = true })
-vim.keymap.set("n", "<leader>5", "<cmd>BufferLineGoToBuffer 5<CR>", { silent = true })
-
--- ^M を削除
--- WSLのときのみ必要
--- vim.keymap.set("n", "<leader>m", ":%s/\\r//g<CR>")
-
+-- =========================================================
 -- Debug (DAP)
-local dap = require("dap")
+local dap   = require("dap")
 local dapui = require("dapui")
 
-vim.keymap.set("n", "<F5>", function() dap.continue() end, { desc = "デバッグ開始/継続" })
-vim.keymap.set("n", "<F10>", function() dap.step_over() end, { desc = "ステップオーバー" })
-vim.keymap.set("n", "<F11>", function() dap.step_into() end, { desc = "ステップイン" })
-vim.keymap.set("n", "<F12>", function() dap.step_out() end, { desc = "ステップアウト" })
-vim.keymap.set("n", "<Leader>b", function() dap.toggle_breakpoint() end, { desc = "ブレークポイント切替" })
-vim.keymap.set("n", "<Leader>B", function() dap.set_breakpoint(vim.fn.input("Condition: ")) end, { desc = "条件付きブレークポイント" })
-vim.keymap.set("n", "<Leader>dr", function() dap.repl.open() end, { desc = "デバッグREPL" })
-vim.keymap.set("n", "<Leader>du", function() dapui.toggle() end, { desc = "DAP UI切替" })
+vim.keymap.set("n", "<F5>",  dap.continue,          { desc = "DAP Continue" })
+vim.keymap.set("n", "<F10>", dap.step_over,         { desc = "DAP Step Over" })
+vim.keymap.set("n", "<F11>", dap.step_into,         { desc = "DAP Step Into" })
+vim.keymap.set("n", "<F12>", dap.step_out,          { desc = "DAP Step Out" })
+vim.keymap.set("n", "<Leader>b", dap.toggle_breakpoint, { desc = "Toggle Breakpoint" })
+vim.keymap.set("n", "<Leader>B", function()
+  dap.set_breakpoint(vim.fn.input("Condition: "))
+end, { desc = "Conditional Breakpoint" })
 
--- 直前の文字列を大文字に変換してくれる
-vim.keymap.set("i", "<C-l>",
-    function()
-        local line = vim.fn.getline(".")
-        local col = vim.fn.getpos(".")[3]
-        local substring = line:sub(1, col - 1)
-        local result = vim.fn.matchstr(substring, [[\v<(\k(<)@!)*$]])
-        return "<C-w>" .. result:upper()
-    end,
-    {expr = true}
-)
+vim.keymap.set("n", "<Leader>dr", function() dap.repl.open() end, { desc = "DAP REPL" })
+vim.keymap.set("n", "<Leader>du", dapui.toggle,                 { desc = "DAP UI Toggle" })
+
+-- =========================================================
+-- Insert: 直前の単語を大文字化
+vim.keymap.set("i", "<C-l>", function()
+  local line = vim.fn.getline(".")
+  local col  = vim.fn.getpos(".")[3]
+  local head = line:sub(1, col - 1)
+  local word = vim.fn.matchstr(head, [[\v<(\k(<)@!)*$]])
+  return "<C-w>" .. word:upper()
+end, { expr = true })
