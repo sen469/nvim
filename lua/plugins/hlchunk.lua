@@ -11,6 +11,7 @@ return {
         exclude_filetypes = {
           aerial = true,
           dashboard = true,
+		  tex = true,
         },
         support_filetypes = { 
             "lua", 
@@ -34,4 +35,3 @@ return {
     })
   end,
 }
-
