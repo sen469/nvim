@@ -1,8 +1,6 @@
 -- lua/plugins.lua
 return {
   'tpope/vim-sensible',  -- sensicalな設定を提供するプラグイン
-  'junegunn/fzf.vim',    -- Fuzzy Finder
-
 
   require("plugins.autopairs"),
   require("plugins.lsp"),

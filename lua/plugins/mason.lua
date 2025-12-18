@@ -4,10 +4,7 @@ return {
     "williamboman/mason-lspconfig.nvim",
     "neovim/nvim-lspconfig",
   },
+  -- 設定は nvim/lua/lsp.lua で行うため、ここでは何もしない
   config = function()
-    require("mason").setup()
-    require("mason-lspconfig").setup({
-      ensure_installed = { "clangd", "pyright", "ts_sl", "rust_analyzer", "html", "cssls" },
-    })
-  end
+  end,
 }
