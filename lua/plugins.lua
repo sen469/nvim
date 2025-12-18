@@ -7,7 +7,6 @@ return {
   require("plugins.autopairs"),
   require("plugins.lsp"),
   require("plugins.nvim-neo-tree"),
-  require("plugins.one_monokai"),
   require("plugins.toggleterm"),
   require("plugins.gitsigns"),
   require("plugins.lualine"),
@@ -25,6 +24,10 @@ return {
   require("plugins.treesj"),
   require("plugins.nvim-ts-autotag"),
   require("plugins.rainbow-delimiters"),
+  require("plugins.vimtex"),
+  require("plugins.one_monokai"),
+  require("plugins.telescope"),
+  require("plugins.fzf-native"),
 
   -- git管理--------------------------------------------------------------
   -- vim-fugitive
