@@ -26,6 +26,7 @@ return {
   require("plugins.one_monokai"),
   require("plugins.telescope"),
   require("plugins.fzf-native"),
+  require("plugins.nvim-surround"),
 
   -- git管理--------------------------------------------------------------
   -- vim-fugitive
