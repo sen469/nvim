@@ -24,6 +24,8 @@ return {
   require("plugins.dial"),
   require("plugins.autotag"),
   require("plugins.rainbow-delimiters"),
+  require("plugins.telescope"),
+  require("plugins.fzf-native"),
   require("plugins.nvim-surround"),
 
   -- git管理--------------------------------------------------------------

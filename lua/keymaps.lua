@@ -1,6 +1,11 @@
 -- Telescope
-vim.keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { noremap = true, silent = true })
-vim.keymap.set("n", "<leader>fg", "<cmd>Telescope live_grep<cr>", { noremap = true, silent = true })
+-- Telescope
+local builtin = require("telescope.builtin")
+
+vim.keymap.set("n", "<leader>ff", builtin.find_files, opts)
+vim.keymap.set("n", "<leader>fg", builtin.live_grep,  opts)
+vim.keymap.set("n", "<leader>fb", builtin.buffers,    opts)
+vim.keymap.set("n", "<leader>fh", builtin.help_tags,  opts)
 
 -- 画面分割
 vim.keymap.set("n", "ss", ":split<Return><C-w>w")
