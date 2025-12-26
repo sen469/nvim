@@ -38,3 +38,18 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
   pattern = { "yaml" },
   command = "setlocal expandtab",
 })
+
+-- 起動時チェック
+if vim.fn.has("nvim") == 1 and vim.fn.glob("*.tex") ~= "" then
+  vim.fn.serverstart("/tmp/nvim")
+end
+
+-- 後から開いた場合
+vim.api.nvim_create_autocmd("BufReadPost", {
+  pattern = "*.tex",
+  callback = function()
+    if vim.v.servername == "" then
+      vim.fn.serverstart("/tmp/nvim")
+    end
+  end,
+})
