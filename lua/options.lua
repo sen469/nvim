@@ -43,3 +43,14 @@ vim.opt.pumblend = 20 -- ポップアップメニューの不透明度
 
 vim.opt.list = true
 vim.opt.listchars = { tab = "»-", trail = "·", extends = "→", precedes = "←", space = " " }
+
+vim.o.autoread = true
+vim.o.updatetime = 200
+vim.api.nvim_create_augroup("AutoRead", { clear = true })
+vim.api.nvim_create_autocmd(
+  { "FocusGained", "BufEnter", "CursorHold", "CursorHoldI" },
+  {
+    group = "AutoRead",
+    command = "if mode() != 'c' | checktime | endif",
+  }
+)
