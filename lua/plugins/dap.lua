@@ -11,42 +11,112 @@ return {
       local dap = require("dap")
       local dapui = require("dapui")
 
+      -- ====================
+      -- dap-ui
+      -- ====================
       dapui.setup()
 
-      -- UIの自動開閉
-      dap.listeners.after.event_initialized["dapui_config"] = function()
+      dap.listeners.after.event_initialized["dapui"] = function()
         dapui.open()
       end
-      dap.listeners.before.event_terminated["dapui_config"] = function()
+      dap.listeners.before.event_terminated["dapui"] = function()
         dapui.close()
       end
-      dap.listeners.before.event_exited["dapui_config"] = function()
+      dap.listeners.before.event_exited["dapui"] = function()
         dapui.close()
       end
 
-      -- C++用：launch.json 風の設定
-      dap.configurations.cpp = {
-        {
-          name = "Launch file",
-          type = "codelldb",
-          request = "launch",
-          program = function()
-            return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
-          end,
-          cwd = "${workspaceFolder}",
-          stopOnEntry = false,
-          args = {},
+      -- ====================
+      -- codelldb adapter
+      -- ====================
+      dap.adapters.codelldb = {
+        type = "server",
+        port = "${port}",
+        executable = {
+          command = vim.fn.stdpath("data") .. "/mason/bin/codelldb",
+          args = { "--port", "${port}" },
         },
       }
 
-      -- Cにも流用
+      -- ====================
+      -- C / C++
+      -- ====================
+      dap.configurations.cpp = {
+        {
+          name = "Launch",
+          type = "codelldb",
+          request = "launch",
+          program = function()
+            return vim.fn.input(
+              "Path to executable: ",
+              vim.fn.getcwd() .. "/",
+              "file"
+            )
+          end,
+          cwd = "${workspaceFolder}",
+          stopOnEntry = false,
+
+          initCommands = {
+            "settings set target.process.thread.step-avoid-libraries true",
+            "settings set target.process.thread.step-avoid-regexp ^(std::|__)",
+          },
+        },
+      }
       dap.configurations.c = dap.configurations.cpp
 
-      -- ホバーウィンドウで変数の中身をチェックできる
-      vim.keymap.set("n", "K", function()
+      -- =====================================================
+      -- DAP hover 管理（複数保持 + ESC 全消去）
+      -- =====================================================
+      local dap_hover_wins = {}
+
+      local function dap_hover_keep()
         local widgets = require("dap.ui.widgets")
+        local cur_win = vim.api.nvim_get_current_win()
+
         widgets.hover()
-      end, { desc = "DAP hover" })
+
+        local hover_win = vim.api.nvim_get_current_win()
+        if hover_win ~= cur_win then
+          table.insert(dap_hover_wins, hover_win)
+          vim.schedule(function()
+            if vim.api.nvim_win_is_valid(cur_win) then
+              vim.api.nvim_set_current_win(cur_win)
+            end
+          end)
+        end
+      end
+
+      local function close_all_dap_hovers()
+        for _, win in ipairs(dap_hover_wins) do
+          if vim.api.nvim_win_is_valid(win) then
+            vim.api.nvim_win_close(win, true)
+          end
+        end
+        dap_hover_wins = {}
+      end
+
+      -- ====================
+      -- DAP 中のみ keymap
+      -- ====================
+      dap.listeners.after.event_initialized["dap_hover_keys"] = function()
+        vim.keymap.set("n", "K", dap_hover_keep, {
+          buffer = true,
+          desc = "DAP Hover (keep, no focus)",
+        })
+
+        vim.keymap.set("n", "<Esc>", close_all_dap_hovers, {
+          buffer = true,
+          desc = "Close all DAP hovers",
+        })
+      end
+
+      dap.listeners.before.event_terminated["dap_hover_keys"] = function()
+        close_all_dap_hovers()
+      end
+
+      dap.listeners.before.event_exited["dap_hover_keys"] = function()
+        close_all_dap_hovers()
+      end
     end,
   },
 
@@ -62,13 +132,9 @@ return {
       "mfussenegger/nvim-dap",
     },
     opts = {
-      ensure_installed = { "codelldb" }, -- ←ここで自動インストール
+      ensure_installed = { "codelldb" },
       automatic_installation = true,
-      handlers = {
-        function(config)
-          require("mason-nvim-dap").default_setup(config)
-        end,
-      },
+      automatic_setup = false,
     },
   },
 }
