@@ -19,7 +19,7 @@ return {
   require("plugins.dap"),
   require("plugins.42-header"),
   require("plugins.restore-cursor"),
-  require("plugins.bufferline"),
+  -- require("plugins.bufferline"),
   require("plugins.comment"),
   require("plugins.dial"),
   require("plugins.autotag"),
