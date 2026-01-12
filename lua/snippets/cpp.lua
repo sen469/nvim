@@ -155,7 +155,7 @@ ls.add_snippets("cpp", {
 			"\t\tif (isprime[p])",
 			"\t\t{",
 			"\t\t\tres.push_back(p);",
-			"\t\t\tfor (int q = 2 * p; q <= n; q += p)",
+			"\t\t\tfor (int q = 2 * p; q < n; q += p)",
 			"\t\t\t\tisprime[q] = 0;",
 			"\t\t}",
 			"\t}",
