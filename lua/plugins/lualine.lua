@@ -12,7 +12,7 @@ return {
                 icons_enabled = true,
                 theme = 'auto',
 
-                component_separators = { left = '', right = '' },
+                component_separators = { left = '│', right = '│' },
                 section_separators = { left = '', right = '' },
 
                 disabled_filetypes = {
@@ -50,6 +50,7 @@ return {
                             directory =  '',
                         },
 
+                        -- [No Name] を隠すフィルタ処理
                         filter = function(buf)
                             local bufnr = buf.bufnr
                             if vim.api.nvim_buf_get_name(bufnr) == "" and bufnr ~= vim.api.nvim_get_current_buf() then
@@ -73,34 +74,19 @@ return {
             },
 
             sections = {
-                lualine_a = {
-                    { 'mode', separator = { right = '' } },
-                },
-                lualine_b = {
-                    'branch',
-                    'diff',
-                    { 'diagnostics', separator = { right = '' } },
-                },
-                lualine_c = {
-                    'filename'
-                },
-                lualine_x = {
-                    { 'encoding', separator = { left = '' } },
-                    'fileformat',
-                    'filetype',
-                },
+                lualine_a = { 'mode' },
+                lualine_b = { 'branch', 'diff', 'diagnostics' },
+                lualine_c = { 'filename' },
+                lualine_x = { 'encoding', 'fileformat', 'filetype' },
                 lualine_y = 
                 {
-                    { 'progress', separator = { left = '' } },
+                    'progress',
                     {
                         clock,
                         color = { fg = '#1E1E1E', bg = '#F5A9B8' },
-                        separator = { left = '', right = '' },
                     },
                 },
-                lualine_z = {
-                    { 'location', separator = { left = '' } }
-                }
+                lualine_z = { 'location' }
             },
             inactive_sections = {
                 lualine_a = {},
