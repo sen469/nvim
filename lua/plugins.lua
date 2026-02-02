@@ -27,6 +27,7 @@ return {
   require("plugins.telescope"),
   require("plugins.fzf-native"),
   require("plugins.nvim-surround"),
+  require("plugins.nvim-colorizer"),
 
   -- git管理--------------------------------------------------------------
   -- vim-fugitive

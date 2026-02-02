@@ -10,7 +10,7 @@ return {
     require("neo-tree").setup({
       filesystem = {
         follow_current_file = { enable = true }, -- 現在開いているファイルにフォーカス
-        hijack_netrw_behavior = "open_default", -- netrwの代わりにneo-treeを使う
+        hijack_netrw_behavior = "open_current",
         filtered_items = {
           visible = false, -- trueにすると .gitignore されたものも表示
           hide_dotfiles = false, -- 隠しファイルを表示

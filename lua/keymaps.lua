@@ -181,3 +181,18 @@ vim.keymap.set("i", "<C-l>", function()
   local word = vim.fn.matchstr(head, [[\v<(\k(<)@!)*$]])
   return "<C-w>" .. word:upper()
 end, { expr = true })
+
+
+-- うぃんどうをトグルで最大化する
+local maximized = false
+
+vim.keymap.set('n', '<leader>w', function()
+  if maximized then
+    vim.cmd('wincmd =')
+    maximized = false
+  else
+    vim.cmd('wincmd _')
+    vim.cmd('wincmd |')
+    maximized = true
+  end
+end)
