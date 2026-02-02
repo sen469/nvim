@@ -32,7 +32,29 @@ vim.keymap.set("n", "<F1>", ":edit $MYVIMRC<CR>", opts)
 
 -- =========================================================
 -- File Tree (Neo-tree)
-vim.keymap.set("n", "<leader>e", ":Neotree toggle<CR>", opts)
+-- 修正前: vim.keymap.set("n", "<leader>e", ":Neotree toggle<CR>", opts)
+
+-- 修正後: Neo-treeが開いていれば（GitでもFilesでも）閉じる。閉じていればFilesを開く。
+vim.keymap.set("n", "<leader>e", function()
+  -- 現在のタブ内で neo-tree のウィンドウが開いているか探す
+  local is_neotree_open = false
+  for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
+    local buf = vim.api.nvim_win_get_buf(win)
+    local ft = vim.api.nvim_get_option_value("filetype", { buf = buf })
+    if ft == "neo-tree" then
+      is_neotree_open = true
+      break
+    end
+  end
+
+  if is_neotree_open then
+    -- 開いていれば閉じる（ソースは問わない）
+    vim.cmd("Neotree close")
+  else
+    -- 閉じていれば Filesystem を開く
+    vim.cmd("Neotree filesystem reveal left")
+  end
+end, opts)
 
 -- =========================================================
 -- 編集系ユーティリティ
@@ -196,3 +218,10 @@ vim.keymap.set('n', '<leader>w', function()
     maximized = true
   end
 end)
+
+-- Filesystem を開く
+vim.keymap.set("n", "<leader>nf", ":Neotree filesystem reveal left<CR>", { desc = "Neo-tree Files" })
+-- Buffers を開く
+vim.keymap.set("n", "<leader>nb", ":Neotree buffers reveal left<CR>", { desc = "Neo-tree Buffers" })
+-- Git status を開く
+vim.keymap.set("n", "<leader>ng", ":Neotree git_status reveal left<CR>", { desc = "Neo-tree Git" })
