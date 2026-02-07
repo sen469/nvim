@@ -8,17 +8,18 @@ return {
   },
   config = function()
     -- アイコンやハイライトの微調整（診断アイコンの設定）
-    vim.fn.sign_define("DiagnosticSignError", {text = " ", texthl = "DiagnosticSignError"})
-    vim.fn.sign_define("DiagnosticSignWarn", {text = " ", texthl = "DiagnosticSignWarn"})
-    vim.fn.sign_define("DiagnosticSignInfo", {text = " ", texthl = "DiagnosticSignInfo"})
-    vim.fn.sign_define("DiagnosticSignHint", {text = "󰌵", texthl = "DiagnosticSignHint"})
+	-- nvim 0.12以降に対応のため現在は使用できない。
+    -- vim.fn.sign_define("DiagnosticSignError", {text = " ", texthl = "DiagnosticSignError"})
+    -- vim.fn.sign_define("DiagnosticSignWarn", {text = " ", texthl = "DiagnosticSignWarn"})
+    -- vim.fn.sign_define("DiagnosticSignInfo", {text = " ", texthl = "DiagnosticSignInfo"})
+    -- vim.fn.sign_define("DiagnosticSignHint", {text = "󰌵", texthl = "DiagnosticSignHint"})
 
     require("neo-tree").setup({
       close_if_last_window = false, -- Neo-treeが最後のウィンドウなら閉じる
       popup_border_style = "rounded", -- ポップアップの枠を丸くする
       enable_git_status = true,
       enable_diagnostics = true,
-      
+
       -- 【見た目】上部のソース切り替えタブ（Filesystem, Buffers, Git）のデザイン
       source_selector = {
         winbar = true, -- ウィンドウバーに表示
