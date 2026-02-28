@@ -32,6 +32,9 @@ vim.keymap.set("n", "cpal", ":%y<CR>") -- copy all
 -- 全削除
 vim.keymap.set("n", "clr", ":%d<CR>") -- clear
 
+-- :terminalのときにEscを押すとNormal modeに戻る
+vim.keymap.set('t', '<Esc>', [[<C-\><C-n>]])
+
 -- =========================================================
 -- Bufferline代替設定 (Lualine用 / 標準機能 + Luaスクリプト)
 -- =========================================================
