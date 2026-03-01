@@ -164,3 +164,17 @@ vim.keymap.set("i", "<C-l>",
     end,
     {expr = true}
 )
+
+-- トグルでウィンドウのサイズを最大化
+local maximized = false
+
+vim.keymap.set('n', '<leader>w', function()
+  if maximized then
+    vim.cmd('wincmd =')
+    maximized = false
+  else
+    vim.cmd('wincmd _')
+    vim.cmd('wincmd |')
+    maximized = true
+  end
+end)
