@@ -31,6 +31,9 @@ vim.keymap.set("i", "jk", "<Esc>", opts)
 vim.keymap.set("n", "<F1>", ":edit $MYVIMRC<CR>", opts)
 
 -- =========================================================
+-- :terminalのときにEscを押すとNormal modeに戻る
+vim.keymap.set('t', '<Esc>', [[<C-\><C-n>]])
+-- =========================================================
 -- File Tree (Neo-tree)
 -- 修正前: vim.keymap.set("n", "<leader>e", ":Neotree toggle<CR>", opts)
 

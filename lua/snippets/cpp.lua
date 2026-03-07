@@ -10,6 +10,8 @@ ls.add_snippets("cpp", {
 			"#include <bits/stdc++.h>",
 			"using namespace std;",
 			"",
+			"#define rep(i, n) for(int i=0;i<(int)(n);i++)",
+			"#define rrep(i, m, n) for(int i=(int)m;i<(int)n;i++)",
 			"#define all(x) x.begin(), x.end()",
 			"#define rall(x) x.rbegin(), x.rend()",
 			"#define INF 1001001001",
