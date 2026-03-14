@@ -31,6 +31,7 @@ return {
   require("plugins.dashbord"),
   require("plugins.nvim-treesitter-context"),
   require("plugins.screenkey"),
+  require("plugins.smear-cursor"),
   -- git管理--------------------------------------------------------------
   -- vim-fugitive
   {
