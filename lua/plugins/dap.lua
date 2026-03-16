@@ -35,7 +35,11 @@ return {
           end,
           cwd = "${workspaceFolder}",
           stopOnEntry = false,
-          args = {},
+          initCommands = {
+               "settings set target.process.thread.step-avoid-libraries true",
+               "settings set target.process.thread.step-avoid-regexp ^(std::|__|atcoder::)",
+          },
+		  args = {},
         },
       }
 
