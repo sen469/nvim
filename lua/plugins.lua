@@ -10,6 +10,7 @@ return {
   require("plugins.one_monokai"),
   require("plugins.toggleterm"),
   require("plugins.gitsigns"),
+  require("plugins.vim-fugitive"),
   require("plugins.lualine"),
   require("plugins.hlchunk"),
   require("plugins.treesitter"),
@@ -32,12 +33,4 @@ return {
   require("plugins.nvim-treesitter-context"),
   require("plugins.screenkey"),
   require("plugins.smear-cursor"),
-  -- git管理--------------------------------------------------------------
-  -- vim-fugitive
-  {
-    "tpope/vim-fugitive",
-    config = function()
-      -- 必要に応じて設定を追加
-    end
-  }
 }
