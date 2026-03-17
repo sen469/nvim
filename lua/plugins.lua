@@ -31,4 +31,5 @@ return {
   require("plugins.nvim-treesitter-context"),
   require("plugins.screenkey"),
   require("plugins.smear-cursor"),
+  require("plugins.render-markdown"),
 }
