@@ -11,7 +11,15 @@ return {
       local dap = require("dap")
       local dapui = require("dapui")
 
-      dapui.setup()
+      dapui.setup({
+        icons = {
+            expanded = "",   -- 展開された状態のアイコン
+            collapsed = "",   -- 折りたたまれた状態のアイコン
+            breakpoint = "",  -- ブレークポイントのアイコン
+            breakpoint_rejected = "",  -- 拒否されたブレークポイントのアイコン
+            log_point = "",  -- ログポイントのアイコン
+    stopped = "",    -- 停止状態のアイコン
+  }      })
 
       -- UIの自動開閉
       dap.listeners.after.event_initialized["dapui_config"] = function()
@@ -35,10 +43,10 @@ return {
           end,
           cwd = "${workspaceFolder}",
           stopOnEntry = false,
-          initCommands = {
-               "settings set target.process.thread.step-avoid-libraries true",
-               "settings set target.process.thread.step-avoid-regexp ^(std::|__|atcoder::)",
-          },
+     initCommands = {
+      "settings set target.process.thread.step-avoid-libraries true",
+      "settings set target.process.thread.step-avoid-regexp (std::|__|atcoder::|.*/atcoder/.*)",
+    },
 		  args = {},
         },
       }
