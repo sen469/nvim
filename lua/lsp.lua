@@ -46,7 +46,7 @@ mason_lspconfig.setup_handlers({
         end
 
         return {
-          "/Users/sen46/.local/share/nvim/mason/packages/clangd/clangd_21.1.0/bin/clangd",
+          "/Users/sen46/.local/share/nvim/mason/bin/clangd",
           "--compile-commands-dir=" .. compile_dir,
         }
       end)(),
