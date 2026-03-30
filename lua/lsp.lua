@@ -38,12 +38,24 @@ mason_lspconfig.setup_handlers({
       vim.fn.mkdir(clangd_conf_dir, "p")
     end
 
-    local clangd_config_file = clangd_conf_dir .. "/config.yaml"
+    -- inclde <bits/stdc++.h>にエラーが発生した場合はこれのバージョンを見る
+    local clangd_config_file = clangd_conf_dir .. "/compile_flags.txt"
     if vim.fn.filereadable(clangd_config_file) == 0 then
       local default_config = [[
-CompileFlags:
-  Add: [-Wall, -Wextra, -std=c++17]
-]]
+        -Wall
+        -Wextra
+        --gcc-toolchain=/opt/homebrew/opt/gcc
+        -I/opt/homebrew/opt/gcc/include/c++/15/aarch64-apple-darwin24
+        -I./
+        -stdlib=libstdc++
+        -I/opt/homebrew/Cellar/gcc/15.1.0/include/c++/15
+        -I/opt/homebrew/Cellar/gcc/15.1.0/include/c++/15/aarch64-apple-darwin24/
+        -I/opt/homebrew/Cellar/gcc/15.1.0/lib/gcc/15/include
+        -Wno-invalid-constexpr
+        -Wno-deprecated-builtins
+        -Wno-bool-conversion
+        -I/Users/sen46/my/kyopuro/
+      ]]
       local f = io.open(clangd_config_file, "w")
       if f then
         f:write(default_config)
