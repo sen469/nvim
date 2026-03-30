@@ -30,13 +30,35 @@ mason_lspconfig.setup_handlers({
   ["clangd"] = function()
     local util = require("lspconfig.util")
 
+    -- Neovimの設定ディレクトリ内 (~/.config/nvim/clangd) に設定を置く
+    local nvim_config_dir = vim.fn.stdpath("config")
+    local clangd_conf_dir = nvim_config_dir .. "/clangd"
+    
+    if vim.fn.isdirectory(clangd_conf_dir) == 0 then
+      vim.fn.mkdir(clangd_conf_dir, "p")
+    end
+
+    local clangd_config_file = clangd_conf_dir .. "/config.yaml"
+    if vim.fn.filereadable(clangd_config_file) == 0 then
+      local default_config = [[
+CompileFlags:
+  Add: [-Wall, -Wextra, -std=c++17]
+]]
+      local f = io.open(clangd_config_file, "w")
+      if f then
+        f:write(default_config)
+        f:close()
+      end
+    end
+
     lspconfig.clangd.setup({
       on_attach = on_attach,
       capabilities = capabilities,
 
       cmd = (function()
         local root_dir = util.root_pattern("compile_commands.json", ".git")(vim.fn.getcwd())
-        local default_dir = "/Users/sen46/.config/clangd"
+        -- compile_commands.json がない場合のフォールバック先を Neovim 内の clangd フォルダにする
+        local default_dir = clangd_conf_dir
 
         local compile_dir
         if root_dir and vim.fn.filereadable(root_dir .. "/compile_commands.json") == 1 then
@@ -45,8 +67,13 @@ mason_lspconfig.setup_handlers({
           compile_dir = default_dir
         end
 
+        local clangd_path = vim.fn.stdpath("data") .. "/mason/bin/clangd"
+        if vim.fn.executable(clangd_path) ~= 1 then
+          clangd_path = "clangd"
+        end
+
         return {
-          "/Users/sen46/.local/share/nvim/mason/bin/clangd",
+          clangd_path,
           "--compile-commands-dir=" .. compile_dir,
         }
       end)(),
@@ -88,12 +115,21 @@ mason_lspconfig.setup_handlers({
 
   -- ▼▼▼ MATLAB ▼▼▼
   ["matlab_ls"] = function()
+    local matlab_path = "/Applications/MATLAB_R2025a.app"
+    -- macOSの場合、/Applications/MATLAB_*.app を検索して最新（最初に見つかったもの）を使用
+    if vim.fn.has("mac") == 1 and vim.fn.isdirectory(matlab_path) == 0 then
+      local matlab_apps = vim.fn.glob("/Applications/MATLAB_*.app", 0, 1)
+      if #matlab_apps > 0 then
+        matlab_path = matlab_apps[1]
+      end
+    end
+
     lspconfig.matlab_ls.setup({
       on_attach = on_attach,
       capabilities = capabilities,
       settings = {
         MATLAB = {
-          installPath = "/Applications/MATLAB_R2025a.app"
+          installPath = matlab_path
         }
       },
       single_file_support = true,

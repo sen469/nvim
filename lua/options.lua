@@ -17,7 +17,7 @@ vim.opt.laststatus = 3 -- ステータスラインを常に表示
 -- 42tokyo用はfalse
 vim.opt.expandtab = false -- タブをスペースに変換
 vim.opt.scrolloff = 7 -- カーソルの上下に最低10行の余白を確保
-vim.opt.shell = 'zsh' -- シェルに `zsh` を使用
+vim.opt.shell = os.getenv("SHELL") or "zsh" -- シェルを環境変数から取得、デフォルトは `zsh`
 vim.opt.inccommand = 'split' -- 置換時に結果をリアルタイムでプレビュー（分割表示）
 vim.opt.ignorecase = true -- 検索時に大文字小文字を区別しない
 vim.opt.smarttab = true -- インデント時に `shiftwidth` を考慮したタブ動作をする
