@@ -12,7 +12,7 @@ vim.opt.smartindent = true -- スマートインデント（C言語などの構�
 vim.opt.hlsearch = true -- 検索時に一致するテキストをハイライト
 vim.opt.backup = false -- バックアップファイルを作成しない
 vim.opt.showcmd = true -- コマンド入力中にコマンドを表示
-vim.opt.cmdheight = 2 -- コマンドラインの高さを2行に設定
+vim.opt.cmdheight = 1 -- コマンドラインの高さを2行に設定
 vim.opt.laststatus = 3 -- ステータスラインを常に表示
 -- 42tokyo用はfalse
 vim.opt.expandtab = false -- タブをスペースに変換
@@ -34,7 +34,7 @@ vim.opt.signcolumn = 'yes' -- 行番号の横に余白を確保（警告やGit�
 vim.opt.hidden = true -- 未保存のバッファを切り替え可能にする
 vim.opt.swapfile = false -- スワップファイルを生成しない
 vim.opt.cursorline = true -- 現在の行をハイライトにする
-vim.opt.cursorcolumn = true -- 現在の列をハイライトにする
+vim.opt.cursorcolumn = false -- 現在の列をハイライトにする
 vim.opt.winblend = 20 -- ウィンドウの不透明度
 vim.opt.pumblend = 20 -- ポップアップメニューの不透明度
 
