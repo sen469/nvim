@@ -31,8 +31,8 @@ vim.opt.showtabline = 2 -- タブラインを常に表示
 -- クリップボードの自動探索をスキップして高速化
 vim.g.clipboard = {
   name = "myClipboard",
-  copy = { ["+"] = "xclip -selection clipboard", ["*"] = "xclip -selection clipboard" },
-  paste = { ["+"] = "xclip -selection clipboard -o", ["*"] = "xclip -selection clipboard -o" },
+  copy = { ["+"] = "xsel --clipboard --input", ["*"] = "xsel --primary --input" },
+  paste = { ["+"] = "xsel --clipboard --output", ["*"] = "xsel --primary --output" },
   cache_enabled = 1,
 }
 vim.opt.clipboard = 'unnamedplus' -- クリップボードとレジスタを共有（システムクリップボード使用）
