@@ -14,15 +14,6 @@ require("lazy").setup({
   require("plugins")
 })
 
--- lspconfig.luaを読み込む
-require('lsp')
-
--- cmpconfig.luaを読み込む
-require('cmpconfig')
-
--- スニペットの設定をロード
-require("snippets")
-
 -- ==============================================================
 -- 基本オプションの設定
 require('options')

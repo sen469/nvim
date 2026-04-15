@@ -1,6 +1,13 @@
 return {
   "nvim-neo-tree/neo-tree.nvim",
   branch = "v3.x",
+  cmd = "Neotree",
+  keys = {
+    { "<leader>e", desc = "Toggle Neo-tree" },
+    { "<leader>nf", desc = "Neo-tree Files" },
+    { "<leader>nb", desc = "Neo-tree Buffers" },
+    { "<leader>ng", desc = "Neo-tree Git" },
+  },
   dependencies = {
     "nvim-lua/plenary.nvim",
     "nvim-tree/nvim-web-devicons", -- アイコン表示

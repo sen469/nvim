@@ -1,10 +1,12 @@
 return {
   "williamboman/mason.nvim",
+  event = { "BufReadPre", "BufNewFile" },
   dependencies = {
     "williamboman/mason-lspconfig.nvim",
     "neovim/nvim-lspconfig",
+    "hrsh7th/cmp-nvim-lsp",
   },
-  -- 設定は nvim/lua/lsp.lua で行うため、ここでは何もしない
   config = function()
+    require("lsp").setup()
   end,
 }

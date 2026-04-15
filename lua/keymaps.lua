@@ -5,12 +5,10 @@ local opts = { noremap = true, silent = true }
 
 -- =========================================================
 -- Telescope
-local builtin = require("telescope.builtin")
-
-vim.keymap.set("n", "<leader>ff", builtin.find_files, opts)
-vim.keymap.set("n", "<leader>fg", builtin.live_grep,  opts)
-vim.keymap.set("n", "<leader>fb", builtin.buffers,    opts)
-vim.keymap.set("n", "<leader>fh", builtin.help_tags,  opts)
+vim.keymap.set("n", "<leader>ff", function() require("telescope.builtin").find_files() end, opts)
+vim.keymap.set("n", "<leader>fg", function() require("telescope.builtin").live_grep() end,  opts)
+vim.keymap.set("n", "<leader>fb", function() require("telescope.builtin").buffers() end,    opts)
+vim.keymap.set("n", "<leader>fh", function() require("telescope.builtin").help_tags() end,  opts)
 
 -- =========================================================
 -- Window / Split 操作
@@ -168,31 +166,28 @@ end
 -- Debug (DAP) : 常設キーのみ
 -- （hover / preview / ESC 管理は dap.lua 側）
 -- =========================================================
-local dap   = require("dap")
-local dapui = require("dapui")
+vim.keymap.set("n", "<F5>",  function() require("dap").continue() end,  { desc = "DAP Continue" })
+vim.keymap.set("n", "<F10>", function() require("dap").step_over() end, { desc = "DAP Step Over" })
+vim.keymap.set("n", "<F11>", function() require("dap").step_into() end, { desc = "DAP Step Into" })
+vim.keymap.set("n", "<F12>", function() require("dap").step_out() end,  { desc = "DAP Step Out" })
 
-vim.keymap.set("n", "<F5>",  dap.continue,  { desc = "DAP Continue" })
-vim.keymap.set("n", "<F10>", dap.step_over, { desc = "DAP Step Over" })
-vim.keymap.set("n", "<F11>", dap.step_into, { desc = "DAP Step Into" })
-vim.keymap.set("n", "<F12>", dap.step_out,  { desc = "DAP Step Out" })
-
-vim.keymap.set("n", "<Leader>b", dap.toggle_breakpoint, {
+vim.keymap.set("n", "<Leader>b", function() require("dap").toggle_breakpoint() end, {
   desc = "Toggle Breakpoint",
 })
 
 vim.keymap.set("n", "<Leader>B", function()
-  dap.set_breakpoint(vim.fn.input("Condition: "))
+  require("dap").set_breakpoint(vim.fn.input("Condition: "))
 end, {
   desc = "Conditional Breakpoint",
 })
 
 vim.keymap.set("n", "<Leader>dr", function()
-  dap.repl.open()
+  require("dap").repl.open()
 end, {
   desc = "DAP REPL",
 })
 
-vim.keymap.set("n", "<Leader>du", dapui.toggle, {
+vim.keymap.set("n", "<Leader>du", function() require("dapui").toggle() end, {
   desc = "DAP UI Toggle",
 })
 
