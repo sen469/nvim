@@ -17,6 +17,12 @@ vim.keymap.set("n", "sk", "<C-w>k")
 vim.keymap.set("n", "sj", "<C-w>j")
 vim.keymap.set("n", "sl", "<C-w>l")
 
+-- 表示行単位で移動
+vim.keymap.set('n', 'j', 'gj', { noremap = true, silent = true })
+vim.keymap.set('n', 'k', 'gk', { noremap = true, silent = true })
+vim.keymap.set('v', 'j', 'gj', { noremap = true, silent = true })
+vim.keymap.set('v', 'k', 'gk', { noremap = true, silent = true })
+
 -- jkでEsc
 vim.keymap.set("i", "jk", "<Esc>")
 
