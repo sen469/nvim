@@ -11,17 +11,27 @@ vim.opt.rtp:prepend(lazypath)
 
 -- Lazy.nvim をロード
 require("lazy").setup({
-  require("plugins")
+  { import = "plugins" }
+}, {
+  defaults = {
+    lazy = false, -- デフォルトでは即時ロード。各プラグインで個別設定する
+  },
+  performance = {
+    rtp = {
+      -- 不要なランタイムプラグインを無効化して高速化
+      disabled_plugins = {
+        "gzip",
+        -- "matchit",
+        -- "matchparen",
+        -- "netrwPlugin",
+        "tarPlugin",
+        "tohtml",
+        "tutor",
+        "zipPlugin",
+      },
+    },
+  },
 })
-
--- lspconfig.luaを読み込む
-require('lsp')
-
--- cmpconfig.luaを読み込む
-require('cmpconfig')
-
--- スニペットの設定をロード
-require("snippets")
 
 -- ==============================================================
 -- 基本オプションの設定

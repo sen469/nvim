@@ -1,11 +1,11 @@
--- Telescope
--- Telescope
-local builtin = require("telescope.builtin")
+-- lua/keymaps.lua
+local opts = { noremap = true, silent = true }
 
-vim.keymap.set("n", "<leader>ff", builtin.find_files, opts)
-vim.keymap.set("n", "<leader>fg", builtin.live_grep,  opts)
-vim.keymap.set("n", "<leader>fb", builtin.buffers,    opts)
-vim.keymap.set("n", "<leader>fh", builtin.help_tags,  opts)
+-- Telescope
+vim.keymap.set("n", "<leader>ff", function() require("telescope.builtin").find_files() end, opts)
+vim.keymap.set("n", "<leader>fg", function() require("telescope.builtin").live_grep() end,  opts)
+vim.keymap.set("n", "<leader>fb", function() require("telescope.builtin").buffers() end,    opts)
+vim.keymap.set("n", "<leader>fh", function() require("telescope.builtin").help_tags() end,  opts)
 
 -- 画面分割
 vim.keymap.set("n", "ss", ":split<Return><C-w>w")
@@ -147,17 +147,14 @@ end
 vim.keymap.set("n", "<leader>m", ":%s/\\r//g<CR>")
 
 -- Debug (DAP)
-local dap = require("dap")
-local dapui = require("dapui")
-
-vim.keymap.set("n", "<F5>", function() dap.continue() end, { desc = "デバッグ開始/継続" })
-vim.keymap.set("n", "<F10>", function() dap.step_over() end, { desc = "ステップオーバー" })
-vim.keymap.set("n", "<F11>", function() dap.step_into() end, { desc = "ステップイン" })
-vim.keymap.set("n", "<F12>", function() dap.step_out() end, { desc = "ステップアウト" })
-vim.keymap.set("n", "<Leader>b", function() dap.toggle_breakpoint() end, { desc = "ブレークポイント切替" })
-vim.keymap.set("n", "<Leader>B", function() dap.set_breakpoint(vim.fn.input("Condition: ")) end, { desc = "条件付きブレークポイント" })
-vim.keymap.set("n", "<Leader>dr", function() dap.repl.open() end, { desc = "デバッグREPL" })
-vim.keymap.set("n", "<Leader>du", function() dapui.toggle() end, { desc = "DAP UI切替" })
+vim.keymap.set("n", "<F5>", function() require("dap").continue() end, { desc = "デバッグ開始/継続" })
+vim.keymap.set("n", "<F10>", function() require("dap").step_over() end, { desc = "ステップオーバー" })
+vim.keymap.set("n", "<F11>", function() require("dap").step_into() end, { desc = "ステップイン" })
+vim.keymap.set("n", "<F12>", function() require("dap").step_out() end, { desc = "ステップアウト" })
+vim.keymap.set("n", "<Leader>b", function() require("dap").toggle_breakpoint() end, { desc = "ブレークポイント切替" })
+vim.keymap.set("n", "<Leader>B", function() require("dap").set_breakpoint(vim.fn.input("Condition: ")) end, { desc = "条件付きブレークポイント" })
+vim.keymap.set("n", "<Leader>dr", function() require("dap").repl.open() end, { desc = "デバッグREPL" })
+vim.keymap.set("n", "<Leader>du", function() require("dapui").toggle() end, { desc = "DAP UI切替" })
 
 -- 直前の文字列を大文字に変換してくれる
 vim.keymap.set("i", "<C-l>",

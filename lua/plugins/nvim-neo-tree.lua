@@ -1,35 +1,45 @@
 return {
   "nvim-neo-tree/neo-tree.nvim",
   branch = "v3.x",
+  -- cmd = "Neotree" は削除（自動起動に対応させるため）
   dependencies = {
     "nvim-lua/plenary.nvim",
-    "nvim-tree/nvim-web-devicons", -- アイコン表示
+    "nvim-tree/nvim-web-devicons",
     "MunifTanjim/nui.nvim",
   },
+  -- 起動時にディレクトリを開いた場合に対応
+  init = function()
+    if vim.fn.argc() > 0 then
+      local stats = vim.loop.fs_stat(vim.fn.argv(0))
+      if stats and stats.type == "directory" then
+        require("neo-tree")
+      end
+    end
+  end,
   config = function()
     require("neo-tree").setup({
       filesystem = {
-        -- follow_current_file = true, -- 現在開いているファイルにフォーカス
-        follow_current_file = { enable = true }, -- 現在開いているファイルにフォーカス
-        hijack_netrw_behavior = "open_default", -- netrwの代わりにneo-treeを使う
+        follow_current_file = { enable = true },
+        hijack_netrw_behavior = "open_default", -- netrwを乗っ取る
+        use_libuv_file_watcher = true,
         filtered_items = {
-          visible = false, -- trueにすると .gitignore されたものも表示
-          hide_dotfiles = false, -- 隠しファイルを表示
-          hide_gitignored = true, -- gitignoreされたファイルを表示
-          hide_by_name = { "node_modules" }, -- node_modulesを非表示
+          visible = false,
+          hide_dotfiles = false,
+          hide_gitignored = true,
+          hide_by_name = { "node_modules" },
         },
       },
       window = {
-        position = "left", -- 左側に表示
-        width = 30, -- ウィンドウ幅
+        position = "left",
+        width = 30,
         mappings = {
-          ["<CR>"] = "open", -- Enter で開く
+          ["<CR>"] = "open",
           ["o"] = "open",
-          ["s"] = "open_vsplit", -- 垂直分割で開く
-          ["i"] = "open_split", -- 水平分割で開く
-          ["R"] = "refresh", -- `R` でリフレッシュ
-          ["q"] = "close_window", -- `q` で閉じる
-          ["<Tab>"] = "preview", -- Tabでpreviewを表示
+          ["s"] = "open_vsplit",
+          ["i"] = "open_split",
+          ["R"] = "refresh",
+          ["q"] = "close_window",
+          ["<Tab>"] = "preview",
         },
       },
       git_status = {

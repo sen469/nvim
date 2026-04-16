@@ -1,6 +1,7 @@
 -- nvim/lua/plugins/treesitter.lua
 return {
     "nvim-treesitter/nvim-treesitter",
+    event = { "BufReadPost", "BufNewFile" },
     build = ":TSUpdate",
     config = function()
         local configs = require("nvim-treesitter.configs")
