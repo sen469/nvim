@@ -9,7 +9,6 @@ ls.add_snippets("cpp", {
 		t({
 			"#include <bits/stdc++.h>",
 			"using namespace std;",
-			"",
 			"#define rep(i, n) for(int i=0;i<(int)(n);i++)",
 			"#define rrep(i, m, n) for(int i=(int)m;i<(int)n;i++)",
 			"#define all(x) x.begin(), x.end()",
@@ -32,7 +31,6 @@ ls.add_snippets("cpp", {
 			"using vvb = vector<vb>;",
 			"using vd = vector<double>;",
 			"using vvd = vector<vd>;",
-			"",
 			"template <typename T>",
 			"bool chmin(T &a, T b)",
 			"{",
@@ -43,7 +41,6 @@ ls.add_snippets("cpp", {
 			"\t}",
 			"\treturn (false);",
 			"}",
-			"",
 			"template <typename T>",
 			"bool chmax(T &a, T b)",
 			"{",
@@ -54,7 +51,6 @@ ls.add_snippets("cpp", {
 			"\t}",
 			"\treturn (false);",
 			"}",
-			"",
 			"template<typename T>",
 			"istream &operator>>(istream &is, vector<T> &v)",
 			"{",
@@ -62,7 +58,6 @@ ls.add_snippets("cpp", {
 			"\t\tis >> v[i];",
 			"\treturn (is);",
 			"}",
-			"",
 			"template<typename T>",
 			"ostream &operator<<(ostream &os, vector<T> &v)",
 			"{",
@@ -216,5 +211,29 @@ ls.add_snippets("cpp", {
 			"}",
 			"",
 		})
+	}),
+	s("try", {
+			t({
+				"try",
+				"{",
+				"\t"
+			}),
+			i(1, "/* statements */"),
+			t({
+				"",
+				"}",
+				"catch ("
+			}),
+			i(2, "const std::exception& e"),
+			t({
+				")",
+				"{",
+				"\t"
+			}),
+			i(0),
+			t({
+				"",
+				"}"
+			}),
 	}),
 })
