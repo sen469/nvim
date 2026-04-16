@@ -19,15 +19,15 @@ return {
 			"c",
 			"hpp",
         }, -- サポートするファイルタイプ
-        chars = {
-          horizontal_line = "─",
-          vertical_line = "│",
-          left_top = "╭",
-          left_bottom = "╰",
+		chars = {
+          horizontal_line = "━",
+          vertical_line = "┃",
+          left_top = "┏",
+          left_bottom = "┗",
           right_arrow = ">",
         },
         style = {
-          { fg = "#806d9c" },
+          { fg = "#e2c6ff", bold = true },
         },
       },
     })
