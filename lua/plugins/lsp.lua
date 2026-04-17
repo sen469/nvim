@@ -1,30 +1,11 @@
 return {
   {
     "L3MON4D3/LuaSnip",
+    lazy = false,
     version = "v2.*",
     build = "make install_jsregexp",
     config = function()
-      local luasnip = require("luasnip")
-      -- スニペットのロードを遅延
-      require("snippets.cpp")
-      require("snippets.c")
-      require("snippets.python")
-      require("snippets.rust")
-
-      -- スニペットを更新するコマンド
-      vim.api.nvim_create_user_command("LuaSnipReload", function()
-        luasnip.cleanup()
-        package.loaded["snippets.cpp"] = nil
-        package.loaded["snippets.c"] = nil
-        package.loaded["snippets.python"] = nil
-        package.loaded["snippets.rust"] = nil
-
-        require("snippets.cpp")
-        require("snippets.c")
-        require("snippets.python")
-        require("snippets.rust")
-        print("LuaSnip snippets reloaded!")
-      end, {})
+      require("snippets")
     end,
   },
   {
