@@ -17,30 +17,27 @@ vim.keymap.set("n", "sl", "<C-w>l", opts)
 
 -- Insert mode
 vim.keymap.set("i", "jk", "<Esc>", opts)
+vim.keymap.set("i", "<C-l>", "<Esc>viwUea", opts) -- Convert previous word to uppercase
 vim.keymap.set("n", "<F1>", ":edit $MYVIMRC<CR>", opts)
 vim.keymap.set('t', '<Esc>', [[<C-\><C-n>]])
+vim.keymap.set("n", "clr", ":%d<CR>", opts)
+vim.keymap.set("n", "cpal", ":%y<CR>", opts)
 
 -- Neo-tree (関数内で判定)
-vim.keymap.set("n", "<leader>e", function()
-  local is_neotree_open = false
-  for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
-    local buf = vim.api.nvim_win_get_buf(win)
-    if vim.api.nvim_get_option_value("filetype", { buf = buf }) == "neo-tree" then
-      is_neotree_open = true
-      break
-    end
-  end
-  if is_neotree_open then
-    vim.cmd("Neotree close")
-  else
-    vim.cmd("Neotree filesystem reveal left")
-  end
-end, opts)
+vim.keymap.set("n", "<leader>e", ":Neotree toggle<CR>", opts)
+vim.keymap.set("n", "\\e", ":Neotree toggle<CR>", opts)
 
 -- Buffer 操作
 vim.keymap.set("n", "<Tab>",   ":bnext<CR>", opts)
 vim.keymap.set("n", "<S-Tab>", ":bprev<CR>", opts)
 vim.keymap.set("n", "<leader>bd", ":bdelete<CR>", opts)
+vim.keymap.set("n", "<leader>bc", ":BufferLinePickClose<CR>", opts)
+vim.keymap.set("n", "<leader>bo", ":BufferLineCloseOthers<CR>", opts)
+vim.keymap.set("n", "<leader>bl", ":BufferLineCloseLeft<CR>", opts)
+vim.keymap.set("n", "<leader>br", ":BufferLineCloseRight<CR>", opts)
+for i = 1, 5 do
+  vim.keymap.set("n", "<leader>" .. i, ":BufferLineGoToBuffer " .. i .. "<CR>", opts)
+end
 
 -- Debug (DAP)
 vim.keymap.set("n", "<F5>",  function() require("dap").continue() end,  opts)
@@ -48,6 +45,8 @@ vim.keymap.set("n", "<F10>", function() require("dap").step_over() end, opts)
 vim.keymap.set("n", "<F11>", function() require("dap").step_into() end, opts)
 vim.keymap.set("n", "<F12>", function() require("dap").step_out() end,  opts)
 vim.keymap.set("n", "<Leader>b",  function() require("dap").toggle_breakpoint() end, opts)
+vim.keymap.set("n", "<Leader>B",  function() require("dap").set_breakpoint(vim.fn.input('Breakpoint condition: ')) end, opts)
+vim.keymap.set("n", "<Leader>dr", function() require("dap").repl.open() end, opts)
 vim.keymap.set("n", "<Leader>du", function() require("dapui").toggle() end, opts)
 
 -- 最大化

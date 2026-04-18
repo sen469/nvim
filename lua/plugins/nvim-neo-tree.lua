@@ -3,7 +3,8 @@ return {
   branch = "v3.x",
   cmd = "Neotree",
   keys = {
-    { "<leader>e", desc = "Toggle Neo-tree" },
+    { "<leader>e", ":Neotree toggle<CR>", desc = "Toggle Neo-tree" },
+    { "\\e", ":Neotree toggle<CR>", desc = "Toggle Neo-tree" },
     { "<leader>nf", desc = "Neo-tree Files" },
     { "<leader>nb", desc = "Neo-tree Buffers" },
     { "<leader>ng", desc = "Neo-tree Git" },
