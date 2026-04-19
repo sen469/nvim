@@ -1,3 +1,6 @@
+-- Leader キーの設定 (プラグインのロード前に必要)
+vim.g.mapleader = "\\"
+
 -- Lazy.nvim のパスを設定
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
