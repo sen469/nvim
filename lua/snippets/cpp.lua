@@ -62,7 +62,7 @@ ls.add_snippets("cpp", {
 			"ostream &operator<<(ostream &os, vector<T> &v)",
 			"{",
 			"\tfor (int i = 0; i < (int)v.size(); i++)",
-			"\t\tos << v[i] << (i == (int)v.size() - 1 ? '\\n' : ' ');",
+			"\t\tos << v[i] << (i == (int)v.size() - 1 ? '\n' : ' ');",
 			"\treturn (os);",
 			"}",
 			"",
