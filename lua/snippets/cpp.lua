@@ -15,7 +15,7 @@ ls.add_snippets("cpp", {
 			"#define all(x) x.begin(), x.end()",
 			"#define rall(x) x.rbegin(), x.rend()",
 			"#define INF 1001001001",
-			"#define INFF 1001001001001001001",
+			"#define INFF 1001001001001001001LL",
 			"using ll = long long;",
 			"using ull = unsigned long long;",
 			"using ld = long double;",

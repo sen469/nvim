@@ -1,7 +1,8 @@
 return {
   "nvim-neo-tree/neo-tree.nvim",
   branch = "v3.x",
-  cmd = "Neotree",
+  -- cmd = "Neotree", -- ディレクトリ指定での起動に対応するため、コマンドでの遅延読み込みを解除
+  lazy = false, -- 起動時に読み込む
   keys = {
     { "<leader>e", ":Neotree toggle<CR>", desc = "Toggle Neo-tree" },
     { "\\e", ":Neotree toggle<CR>", desc = "Toggle Neo-tree" },
@@ -9,6 +10,11 @@ return {
     { "<leader>nb", desc = "Neo-tree Buffers" },
     { "<leader>ng", desc = "Neo-tree Git" },
   },
+  init = function()
+    -- netrwを無効化してNeo-treeがディレクトリを扱えるようにする
+    vim.g.loaded_netrw = 1
+    vim.g.loaded_netrwPlugin = 1
+  end,
   dependencies = {
     "nvim-lua/plenary.nvim",
     "nvim-tree/nvim-web-devicons", -- アイコン表示

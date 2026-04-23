@@ -4,15 +4,6 @@
 local opts = { noremap = true, silent = true }
 
 -- =========================================================
--- Telescope
-local builtin = require("telescope.builtin")
-
-vim.keymap.set("n", "<leader>ff", builtin.find_files, opts)
-vim.keymap.set("n", "<leader>fg", builtin.live_grep,  opts)
-vim.keymap.set("n", "<leader>fb", builtin.buffers,    opts)
-vim.keymap.set("n", "<leader>fh", builtin.help_tags,  opts)
-
--- =========================================================
 -- Window / Split 操作
 vim.keymap.set("n", "ss", ":split<CR><C-w>w",  opts)
 vim.keymap.set("n", "sv", ":vsplit<CR><C-w>w", opts)
@@ -36,6 +27,8 @@ vim.keymap.set('t', '<Esc>', [[<C-\><C-n>]])
 
 -- =========================================================
 -- File Tree (Neo-tree)
+-- (プラグイン側で lazy-load 設定されているため、ここではコマンドを直接叩くか、
+--  読み込みを遅延させるように関数化する)
 vim.keymap.set("n", "<leader>e", function()
   local is_neotree_open = false
   for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
@@ -60,7 +53,7 @@ vim.keymap.set("n", "cpal", ":%y<CR>", opts)
 vim.keymap.set("n", "clr",  ":%d<CR>", opts)
 
 -- =========================================================
--- バッファ操作ロジック (確実に動作する API 直叩き)
+-- バッファ操作ロジック
 -- =========================================================
 
 local function get_listed_bufs()
@@ -155,19 +148,8 @@ for i = 1, 5 do
 end
 
 -- =========================================================
--- Debug (DAP)
+-- Debug (DAP) - キーマップは plugins/dap.lua に移動
 -- =========================================================
-local dap   = require("dap")
-local dapui = require("dapui")
-
-vim.keymap.set("n", "<F5>",  dap.continue,  { desc = "DAP Continue" })
-vim.keymap.set("n", "<F10>", dap.step_over, { desc = "DAP Step Over" })
-vim.keymap.set("n", "<F11>", dap.step_into, { desc = "DAP Step Into" })
-vim.keymap.set("n", "<F12>", dap.step_out,  { desc = "DAP Step Out" })
-vim.keymap.set("n", "<Leader>b", dap.toggle_breakpoint, { desc = "Toggle Breakpoint" })
-vim.keymap.set("n", "<Leader>B", function() dap.set_breakpoint(vim.fn.input("Condition: ")) end, { desc = "Conditional Breakpoint" })
-vim.keymap.set("n", "<Leader>dr", function() dap.repl.open() end, { desc = "DAP REPL" })
-vim.keymap.set("n", "<Leader>du", dapui.toggle, { desc = "DAP UI Toggle" })
 
 -- =========================================================
 -- その他
@@ -199,3 +181,4 @@ end)
 vim.keymap.set("n", "<leader>nf", ":Neotree filesystem reveal left<CR>", { desc = "Neo-tree Files" })
 vim.keymap.set("n", "<leader>nb", ":Neotree buffers reveal left<CR>", { desc = "Neo-tree Buffers" })
 vim.keymap.set("n", "<leader>ng", ":Neotree git_status reveal left<CR>", { desc = "Neo-tree Git" })
+

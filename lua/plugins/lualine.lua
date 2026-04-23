@@ -1,6 +1,7 @@
 -- nvim/lua/plugins/lualine.lua
 return {
     'nvim-lualine/lualine.nvim',
+    event = "VeryLazy",
     dependencies = { 'nvim-tree/nvim-web-devicons' },
     config = function()
         local function clock()
