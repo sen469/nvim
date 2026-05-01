@@ -86,15 +86,6 @@ ls.add_snippets("cpp", {
 			"\treturn (0);",
 			"}"
 		}),
-	}, {
-		callbacks = {
-			[0] = {
-				[events.enter] = function()
-					vim.cmd("stopinsert")
-					vim.cmd("normal! zz")
-				end
-			}
-		}
 	}),
 
 	s("dxdy", {
