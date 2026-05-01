@@ -2,20 +2,20 @@
 local opts = { noremap = true, silent = true }
 
 -- Telescope
-vim.keymap.set("n", "<leader>ff", function() require("telescope.builtin").find_files() end, opts)
-vim.keymap.set("n", "<leader>fg", function() require("telescope.builtin").live_grep() end,  opts)
-vim.keymap.set("n", "<leader>fb", function() require("telescope.builtin").buffers() end,    opts)
-vim.keymap.set("n", "<leader>fh", function() require("telescope.builtin").help_tags() end,  opts)
+vim.keymap.set("n", "<leader>ff", function() require("telescope.builtin").find_files() end, { desc = "Find Files" })
+vim.keymap.set("n", "<leader>fg", function() require("telescope.builtin").live_grep() end,  { desc = "Live Grep" })
+vim.keymap.set("n", "<leader>fb", function() require("telescope.builtin").buffers() end,    { desc = "Buffers" })
+vim.keymap.set("n", "<leader>fh", function() require("telescope.builtin").help_tags() end,  { desc = "Help Tags" })
 
 -- 画面分割
-vim.keymap.set("n", "ss", ":split<Return><C-w>w")
-vim.keymap.set("n", "sv", ":vsplit<Return><C-w>w")
+vim.keymap.set("n", "ss", ":split<Return><C-w>w", { desc = "Horizontal Split" })
+vim.keymap.set("n", "sv", ":vsplit<Return><C-w>w", { desc = "Vertical Split" })
 
 -- アクティブウィンドウの移動
-vim.keymap.set("n", "sh", "<C-w>h")
-vim.keymap.set("n", "sk", "<C-w>k")
-vim.keymap.set("n", "sj", "<C-w>j")
-vim.keymap.set("n", "sl", "<C-w>l")
+vim.keymap.set("n", "sh", "<C-w>h", { desc = "Move to Left Window" })
+vim.keymap.set("n", "sk", "<C-w>k", { desc = "Move to Top Window" })
+vim.keymap.set("n", "sj", "<C-w>j", { desc = "Move to Bottom Window" })
+vim.keymap.set("n", "sl", "<C-w>l", { desc = "Move to Right Window" })
 
 -- 表示行単位で移動
 vim.keymap.set('n', 'j', 'gj', { noremap = true, silent = true })
@@ -24,19 +24,19 @@ vim.keymap.set('v', 'j', 'gj', { noremap = true, silent = true })
 vim.keymap.set('v', 'k', 'gk', { noremap = true, silent = true })
 
 -- jkでEsc
-vim.keymap.set("i", "jk", "<Esc>")
+vim.keymap.set("i", "jk", "<Esc>", { desc = "Exit Insert Mode" })
 
 -- 設定ファイルを開く
-vim.keymap.set("n", "<F1>", ":edit $MYVIMRC<CR>")
+vim.keymap.set("n", "<F1>", ":edit $MYVIMRC<CR>", { desc = "Edit Config" })
 
 -- ファイルツリー
-vim.keymap.set("n", "<leader>e", ":Neotree toggle<CR>")
+vim.keymap.set("n", "<leader>e", ":Neotree toggle<CR>", { desc = "Toggle Explorer" })
 
 -- 全選択コピー
-vim.keymap.set("n", "cpal", ":%y<CR>") -- copy all
+vim.keymap.set("n", "cpal", ":%y<CR>", { desc = "Copy All" }) -- copy all
 
 -- 全削除
-vim.keymap.set("n", "clr", ":%d<CR>") -- clear
+vim.keymap.set("n", "clr", ":%d<CR>", { desc = "Clear All" }) -- clear
 
 -- :terminalのときにEscを押すとNormal modeに戻る
 vim.keymap.set('t', '<Esc>', [[<C-\><C-n>]])
@@ -57,11 +57,11 @@ local function get_listed_bufs()
 end
 
 -- 1. Tab移動 (次/前へ)
-vim.keymap.set("n", "<Tab>",   ":bnext<CR>", opts)
-vim.keymap.set("n", "<S-Tab>", ":bprev<CR>", opts)
+vim.keymap.set("n", "<Tab>",   ":bnext<CR>", { desc = "Next Buffer" })
+vim.keymap.set("n", "<S-Tab>", ":bprev<CR>", { desc = "Previous Buffer" })
 
 -- 2. 現在のバッファを閉じる (\bd)
-vim.keymap.set("n", "<leader>bd", ":bdelete<CR>", opts)
+vim.keymap.set("n", "<leader>bd", ":bdelete<CR>", { desc = "Delete Buffer" })
 
 -- 3. バッファを選んで閉じる (\bc)
 -- 簡易実装: リストを表示して番号入力を待つ
@@ -79,7 +79,7 @@ vim.keymap.set("n", "<leader>bc", function()
       vim.api.nvim_buf_delete(bufs[idx], {})
     end
   end)
-end, opts)
+end, { desc = "Choose Buffer to Delete" })
 
 -- 4. 他のバッファをすべて閉じる (\bo)
 vim.keymap.set("n", "<leader>bo", function()
@@ -89,7 +89,7 @@ vim.keymap.set("n", "<leader>bo", function()
       vim.api.nvim_buf_delete(buf, {})
     end
   end
-end, opts)
+end, { desc = "Delete Other Buffers" })
 
 -- 5. 左側のバッファを閉じる (\bl)
 vim.keymap.set("n", "<leader>bl", function()
@@ -109,7 +109,7 @@ vim.keymap.set("n", "<leader>bl", function()
       vim.api.nvim_buf_delete(bufs[i], {})
     end
   end
-end, opts)
+end, { desc = "Delete Left Buffers" })
 
 -- 6. 右側のバッファを閉じる (\br)
 vim.keymap.set("n", "<leader>br", function()
@@ -129,7 +129,7 @@ vim.keymap.set("n", "<leader>br", function()
       vim.api.nvim_buf_delete(bufs[i], {})
     end
   end
-end, opts)
+end, { desc = "Delete Right Buffers" })
 
 -- 7. 番号でジャンプ (\1 ～ \5)
 -- lualineの表示順（バッファID順）の N 番目に移動します
@@ -139,12 +139,12 @@ for i = 1, 5 do
     if bufs[i] then
       vim.api.nvim_set_current_buf(bufs[i])
     end
-  end, opts)
+  end, { desc = "Jump to Buffer " .. i })
 end
 
 -- ^M を削除
 -- WSLのときのみ必要
-vim.keymap.set("n", "<leader>m", ":%s/\\r//g<CR>")
+vim.keymap.set("n", "<leader>m", ":%s/\\r//g<CR>", { desc = "Remove ^M" })
 
 -- Debug (DAP)
 vim.keymap.set("n", "<F5>", function() require("dap").continue() end, { desc = "デバッグ開始/継続" })
@@ -180,4 +180,4 @@ vim.keymap.set('n', '<leader>w', function()
     vim.cmd('wincmd |')
     maximized = true
   end
-end)
+end, { desc = "Toggle Maximize Window" })
