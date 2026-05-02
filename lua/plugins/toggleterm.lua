@@ -3,7 +3,7 @@
   {
     "akinsho/toggleterm.nvim",
     cmd = { "ToggleTerm" },
-    keys = { [[<c-\>]] },
+    keys = { { [[<c-\>]], desc = "Toggle Terminal" } },
     config = function()
       require("toggleterm").setup{
         open_mapping = [[<c-\>]],  -- ターミナルの開くショートカット

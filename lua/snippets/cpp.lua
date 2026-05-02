@@ -6,8 +6,7 @@ local fmt = require("luasnip.extras.fmt").fmt
 local events = require("luasnip.util.events")
 
 ls.add_snippets("cpp", {
-	s("kyopro", {
-		t({
+	s("kyopro", { t({
 			"#include <bits/stdc++.h>",
 			"using namespace std;",
 			"",
@@ -64,7 +63,7 @@ ls.add_snippets("cpp", {
 			"ostream &operator<<(ostream &os, vector<T> &v)",
 			"{",
 			"\tfor (int i = 0; i < (int)v.size(); i++)",
-			"\t\tos << v[i] << (i == (int)v.size() - 1 ? '\\n' : ' ');",
+			"\t\tos << v[i] << (i == (int)v.size() - 1 ? \"\" : \" \");",
 			"\treturn (os);",
 			"}",
 			"",

@@ -11,11 +11,13 @@ M.setup = function()
 
   -- 2. キーマップ設定（LSP接続時に有効にする共通関数）
   local on_attach = function(client, bufnr)
-    local opts = { noremap = true, silent = true, buffer = bufnr }
-    vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
-    vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
-    vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
-    vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
+    local function opts(desc)
+      return { noremap = true, silent = true, buffer = bufnr, desc = desc }
+    end
+    vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts("Go to Definition"))
+    vim.keymap.set("n", "gr", vim.lsp.buf.references, opts("Show References"))
+    vim.keymap.set("n", "K", vim.lsp.buf.hover, opts("Show Hover Documentation"))
+    vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts("Rename Symbol"))
   end
 
   -- 3. 補完機能（cmp）との連携設定
