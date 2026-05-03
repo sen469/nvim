@@ -1,11 +1,12 @@
 -- nvim/lua/plugins/treesitter.lua
 return {
     "nvim-treesitter/nvim-treesitter",
+    event = { "BufReadPost", "BufNewFile" },
     build = ":TSUpdate",
     config = function()
         local configs = require("nvim-treesitter.configs")
         configs.setup({
-            ensure_installed = { "c", "lua", "vim", "javascript", "html", "cpp" },
+            ensure_installed = { "c", "lua", "vim", "javascript", "html", "cpp", "markdown", "markdown_inline" },
             sync_install = false,
             highlight = {
                 enable = true,

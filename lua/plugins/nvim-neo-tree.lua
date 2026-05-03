@@ -1,21 +1,28 @@
 return {
   "nvim-neo-tree/neo-tree.nvim",
   branch = "v3.x",
+  -- cmd = "Neotree", -- ディレクトリ指定での起動に対応するため、コマンドでの遅延読み込みを解除
+  lazy = false, -- 起動時に読み込む
+  keys = {
+    { "<leader>e", ":Neotree toggle<CR>", desc = "Toggle Neo-tree" },
+    { "\\e", ":Neotree toggle<CR>", desc = "Toggle Neo-tree" },
+    { "<leader>nf", desc = "Neo-tree Files" },
+    { "<leader>nb", desc = "Neo-tree Buffers" },
+    { "<leader>ng", desc = "Neo-tree Git" },
+  },
+  init = function()
+    -- netrwを無効化してNeo-treeがディレクトリを扱えるようにする
+    vim.g.loaded_netrw = 1
+    vim.g.loaded_netrwPlugin = 1
+  end,
   dependencies = {
     "nvim-lua/plenary.nvim",
     "nvim-tree/nvim-web-devicons", -- アイコン表示
     "MunifTanjim/nui.nvim",
   },
   config = function()
-    -- アイコンやハイライトの微調整（診断アイコンの設定）
-	-- nvim 0.12以降に対応のため現在は使用できない。
-    -- vim.fn.sign_define("DiagnosticSignError", {text = " ", texthl = "DiagnosticSignError"})
-    -- vim.fn.sign_define("DiagnosticSignWarn", {text = " ", texthl = "DiagnosticSignWarn"})
-    -- vim.fn.sign_define("DiagnosticSignInfo", {text = " ", texthl = "DiagnosticSignInfo"})
-    -- vim.fn.sign_define("DiagnosticSignHint", {text = "󰌵", texthl = "DiagnosticSignHint"})
-
     require("neo-tree").setup({
-      close_if_last_window = false, -- Neo-treeが最後のウィンドウなら閉じる
+      close_if_last_window = true, -- Neo-treeが最後のウィンドウなら閉じる
       popup_border_style = "rounded", -- ポップアップの枠を丸くする
       enable_git_status = true,
       enable_diagnostics = true,

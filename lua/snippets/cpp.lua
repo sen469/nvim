@@ -3,19 +3,21 @@ local s = ls.snippet
 local t = ls.text_node
 local i = ls.insert_node
 local fmt = require("luasnip.extras.fmt").fmt
+local events = require("luasnip.util.events")
 
 ls.add_snippets("cpp", {
-	s("kyopro", {
-		t({
+	s("kyopro", { t({
 			"#include <bits/stdc++.h>",
 			"using namespace std;",
+			"// #include <atcoder/all>",
+			"// using namespace atcoder;",
 			"",
 			"#define rep(i, n) for(int i=0;i<(int)(n);i++)",
 			"#define rrep(i, m, n) for(int i=(int)m;i<(int)n;i++)",
 			"#define all(x) x.begin(), x.end()",
 			"#define rall(x) x.rbegin(), x.rend()",
 			"#define INF 1001001001",
-			"#define INFF 1001001001001001001",
+			"#define INFF 1001001001001001001LL",
 			"using ll = long long;",
 			"using ull = unsigned long long;",
 			"using ld = long double;",
@@ -63,13 +65,9 @@ ls.add_snippets("cpp", {
 			"ostream &operator<<(ostream &os, vector<T> &v)",
 			"{",
 			"\tfor (int i = 0; i < (int)v.size(); i++)",
-			"\t\tos << v[i] << (i == (int)v.size() - 1 ? '\\n' : ' ');",
+			"\t\tos << v[i] << (i == (int)v.size() - 1 ? \"\" : \" \");",
 			"\treturn (os);",
 			"}",
-			"",
-			"// #include <atcoder/all>",
-			"// using namespace atcoder;",
-			"",
 			"",
 			"int main()",
 			"{",

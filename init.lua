@@ -1,3 +1,6 @@
+-- Leader キーの設定 (プラグインのロード前に必要)
+vim.g.mapleader = "\\"
+
 -- Lazy.nvim のパスを設定
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
@@ -13,15 +16,6 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
   require("plugins")
 })
-
--- lspconfig.luaを読み込む
-require('lsp')
-
--- cmpconfig.luaを読み込む
-require('cmpconfig')
-
--- スニペットの設定をロード
-require("snippets")
 
 -- ==============================================================
 -- 基本オプションの設定

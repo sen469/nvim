@@ -1,6 +1,16 @@
 return {
   {
     "mfussenegger/nvim-dap",
+    keys = {
+      { "<F5>", function() require("dap").continue() end, desc = "DAP Continue" },
+      { "<F10>", function() require("dap").step_over() end, desc = "DAP Step Over" },
+      { "<F11>", function() require("dap").step_into() end, desc = "DAP Step Into" },
+      { "<F12>", function() require("dap").step_out() end, desc = "DAP Step Out" },
+      { "<Leader>b", function() require("dap").toggle_breakpoint() end, desc = "Toggle Breakpoint" },
+      { "<Leader>B", function() require("dap").set_breakpoint(vim.fn.input("Condition: ")) end, desc = "Conditional Breakpoint" },
+      { "<Leader>dr", function() require("dap").repl.open() end, desc = "DAP REPL" },
+      { "<Leader>du", function() require("dapui").toggle() end, desc = "DAP UI Toggle" },
+    },
     dependencies = {
       "rcarriga/nvim-dap-ui",
       "williamboman/mason.nvim",
@@ -38,12 +48,21 @@ return {
         },
       }
 
+      dap.adapters.lldb = {
+        type = "server",
+        port = 12345,
+        executable = {
+          command = "codelldb",
+          args = { "--port", "12345" },
+        },
+      }
+
       -- ====================
       -- C / C++
       -- ====================
       dap.configurations.cpp = {
         {
-          name = "Launch",
+          name = "Launch (Mason codelldb)",
           type = "codelldb",
           request = "launch",
           program = function()
@@ -60,6 +79,17 @@ return {
             "settings set target.process.thread.step-avoid-libraries true",
             "settings set target.process.thread.step-avoid-regexp ^(std::|__)",
           },
+        },
+        {
+          name = "Launch with system codelldb",
+          type = "lldb",
+          request = "launch",
+          program = function()
+            return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+          end,
+          cwd = "${workspaceFolder}",
+          stopAtEntry = true,
+          runInTerminal = true,
         },
       }
       dap.configurations.c = dap.configurations.cpp

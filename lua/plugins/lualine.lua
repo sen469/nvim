@@ -1,11 +1,18 @@
 -- nvim/lua/plugins/lualine.lua
 return {
     'nvim-lualine/lualine.nvim',
+    event = "VeryLazy",
     dependencies = { 'nvim-tree/nvim-web-devicons' },
     config = function()
         local function clock()
-            return os.date("%H:%M")
+            return os.date("%Y/%m/%d %H:%M:%S")
         end
+
+		-- 起動時間を記録するもの
+		local function get_start_up_time()
+			local time = vim.fn.reltimefloat(vim.fn.reltime()) * 1000
+			return string.format("%.2fms", time)
+		end
 
         require('lualine').setup {
             options = {

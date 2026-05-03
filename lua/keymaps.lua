@@ -1,45 +1,35 @@
 -- lua/keymaps.lua
 -- =========================================================
 -- 共通オプション
-local opts = { noremap = true, silent = true }
-
--- =========================================================
--- Telescope
-local builtin = require("telescope.builtin")
-
-vim.keymap.set("n", "<leader>ff", builtin.find_files, opts)
-vim.keymap.set("n", "<leader>fg", builtin.live_grep,  opts)
-vim.keymap.set("n", "<leader>fb", builtin.buffers,    opts)
-vim.keymap.set("n", "<leader>fh", builtin.help_tags,  opts)
+local function make_opts(desc)
+  return { noremap = true, silent = true, desc = desc }
+end
 
 -- =========================================================
 -- Window / Split 操作
-vim.keymap.set("n", "ss", ":split<CR><C-w>w",  opts)
-vim.keymap.set("n", "sv", ":vsplit<CR><C-w>w", opts)
+vim.keymap.set("n", "ss", ":split<CR><C-w>w",  make_opts("Split Horizontal"))
+vim.keymap.set("n", "sv", ":vsplit<CR><C-w>w", make_opts("Split Vertical"))
 
-vim.keymap.set("n", "sh", "<C-w>h", opts)
-vim.keymap.set("n", "sj", "<C-w>j", opts)
-vim.keymap.set("n", "sk", "<C-w>k", opts)
-vim.keymap.set("n", "sl", "<C-w>l", opts)
+vim.keymap.set("n", "sh", "<C-w>h", make_opts("Go to Left Window"))
+vim.keymap.set("n", "sj", "<C-w>j", make_opts("Go to Lower Window"))
+vim.keymap.set("n", "sk", "<C-w>k", make_opts("Go to Upper Window"))
+vim.keymap.set("n", "sl", "<C-w>l", make_opts("Go to Right Window"))
 
 -- =========================================================
 -- Insert mode
-vim.keymap.set("i", "jk", "<Esc>", opts)
+vim.keymap.set("i", "jk", "<Esc>", make_opts("Exit Insert Mode"))
 
 -- =========================================================
 -- 設定ファイル
-vim.keymap.set("n", "<F1>", ":edit $MYVIMRC<CR>", opts)
+vim.keymap.set("n", "<F1>", ":edit $MYVIMRC<CR>", make_opts("Edit Config (init.lua)"))
 
 -- =========================================================
 -- :terminalのときにEscを押すとNormal modeに戻る
-vim.keymap.set('t', '<Esc>', [[<C-\><C-n>]])
+vim.keymap.set('t', '<Esc>', [[<C-\><C-n>]], make_opts("Exit Terminal Mode"))
+
 -- =========================================================
 -- File Tree (Neo-tree)
--- 修正前: vim.keymap.set("n", "<leader>e", ":Neotree toggle<CR>", opts)
-
--- 修正後: Neo-treeが開いていれば（GitでもFilesでも）閉じる。閉じていればFilesを開く。
 vim.keymap.set("n", "<leader>e", function()
-  -- 現在のタブ内で neo-tree のウィンドウが開いているか探す
   local is_neotree_open = false
   for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
     local buf = vim.api.nvim_win_get_buf(win)
@@ -51,24 +41,21 @@ vim.keymap.set("n", "<leader>e", function()
   end
 
   if is_neotree_open then
-    -- 開いていれば閉じる（ソースは問わない）
     vim.cmd("Neotree close")
   else
-    -- 閉じていれば Filesystem を開く
     vim.cmd("Neotree filesystem reveal left")
   end
-end, opts)
+end, make_opts("Toggle Neo-tree"))
 
 -- =========================================================
 -- 編集系ユーティリティ
-vim.keymap.set("n", "cpal", ":%y<CR>", opts)
-vim.keymap.set("n", "clr",  ":%d<CR>", opts)
+vim.keymap.set("n", "cpal", ":%y<CR>", make_opts("Copy All Text"))
+vim.keymap.set("n", "clr",  ":%d<CR>", make_opts("Clear All Text"))
 
 -- =========================================================
--- Bufferline代替設定 (Lualine用 / 標準機能 + Luaスクリプト)
+-- バッファ操作ロジック
 -- =========================================================
 
--- 【補助関数】表示されているバッファのリストを取得 (ID順)
 local function get_listed_bufs()
   local bufs = {}
   for _, buf in ipairs(vim.api.nvim_list_bufs()) do
@@ -79,15 +66,15 @@ local function get_listed_bufs()
   return bufs
 end
 
--- 1. Tab移動 (次/前へ)
-vim.keymap.set("n", "<Tab>",   ":bnext<CR>", opts)
-vim.keymap.set("n", "<S-Tab>", ":bprev<CR>", opts)
+-- 1. Tab移動
+vim.keymap.set("n", "<Tab>",   ":bnext<CR>", make_opts("Next Buffer"))
+vim.keymap.set("n", "<S-Tab>", ":bprev<CR>", make_opts("Previous Buffer"))
 
--- 2. 現在のバッファを閉じる (\bd)
-vim.keymap.set("n", "<leader>bd", ":bdelete<CR>", opts)
+-- 2. 現在のバッファを閉じる (\bb / \bd)
+vim.keymap.set("n", "<leader>bd", ":bdelete<CR>", make_opts("Delete Buffer"))
+vim.keymap.set("n", "<leader>bb", ":bdelete<CR>", make_opts("Delete Buffer"))
 
 -- 3. バッファを選んで閉じる (\bc)
--- 簡易実装: リストを表示して番号入力を待つ
 vim.keymap.set("n", "<leader>bc", function()
   local bufs = get_listed_bufs()
   print("Select buffer to delete:")
@@ -99,118 +86,82 @@ vim.keymap.set("n", "<leader>bc", function()
   vim.ui.input({ prompt = "Index: " }, function(input)
     local idx = tonumber(input)
     if idx and bufs[idx] then
-      vim.api.nvim_buf_delete(bufs[idx], {})
+      vim.api.nvim_buf_delete(bufs[idx], { force = true })
     end
   end)
-end, opts)
+end, make_opts("Choose Buffer to Delete"))
 
 -- 4. 他のバッファをすべて閉じる (\bo)
 vim.keymap.set("n", "<leader>bo", function()
   local current = vim.api.nvim_get_current_buf()
   for _, buf in ipairs(get_listed_bufs()) do
     if buf ~= current then
-      vim.api.nvim_buf_delete(buf, {})
+      vim.api.nvim_buf_delete(buf, { force = true })
     end
   end
-end, opts)
+end, make_opts("Close Other Buffers"))
 
 -- 5. 左側のバッファを閉じる (\bl)
 vim.keymap.set("n", "<leader>bl", function()
   local current = vim.api.nvim_get_current_buf()
   local bufs = get_listed_bufs()
   local current_idx = 0
-  -- 現在位置を探す
   for i, buf in ipairs(bufs) do
     if buf == current then
       current_idx = i
       break
     end
   end
-  -- 自分より前(左)を削除
   if current_idx > 1 then
     for i = 1, current_idx - 1 do
-      vim.api.nvim_buf_delete(bufs[i], {})
+      vim.api.nvim_buf_delete(bufs[i], { force = true })
     end
   end
-end, opts)
+end, make_opts("Close Buffers to the Left"))
 
 -- 6. 右側のバッファを閉じる (\br)
 vim.keymap.set("n", "<leader>br", function()
   local current = vim.api.nvim_get_current_buf()
   local bufs = get_listed_bufs()
   local current_idx = 0
-  -- 現在位置を探す
   for i, buf in ipairs(bufs) do
     if buf == current then
       current_idx = i
       break
     end
   end
-  -- 自分より後(右)を削除
   if current_idx > 0 and current_idx < #bufs then
     for i = current_idx + 1, #bufs do
-      vim.api.nvim_buf_delete(bufs[i], {})
+      vim.api.nvim_buf_delete(bufs[i], { force = true })
     end
   end
-end, opts)
+end, make_opts("Close Buffers to the Right"))
 
 -- 7. 番号でジャンプ (\1 ～ \5)
--- lualineの表示順（バッファID順）の N 番目に移動します
 for i = 1, 5 do
   vim.keymap.set("n", "<leader>" .. i, function()
     local bufs = get_listed_bufs()
     if bufs[i] then
       vim.api.nvim_set_current_buf(bufs[i])
     end
-  end, opts)
+  end, make_opts("Jump to Buffer " .. i))
 end
--- =========================================================
--- Debug (DAP) : 常設キーのみ
--- （hover / preview / ESC 管理は dap.lua 側）
--- =========================================================
-local dap   = require("dap")
-local dapui = require("dapui")
-
-vim.keymap.set("n", "<F5>",  dap.continue,  { desc = "DAP Continue" })
-vim.keymap.set("n", "<F10>", dap.step_over, { desc = "DAP Step Over" })
-vim.keymap.set("n", "<F11>", dap.step_into, { desc = "DAP Step Into" })
-vim.keymap.set("n", "<F12>", dap.step_out,  { desc = "DAP Step Out" })
-
-vim.keymap.set("n", "<Leader>b", dap.toggle_breakpoint, {
-  desc = "Toggle Breakpoint",
-})
-
-vim.keymap.set("n", "<Leader>B", function()
-  dap.set_breakpoint(vim.fn.input("Condition: "))
-end, {
-  desc = "Conditional Breakpoint",
-})
-
-vim.keymap.set("n", "<Leader>dr", function()
-  dap.repl.open()
-end, {
-  desc = "DAP REPL",
-})
-
-vim.keymap.set("n", "<Leader>du", dapui.toggle, {
-  desc = "DAP UI Toggle",
-})
 
 -- =========================================================
+-- その他
+-- =========================================================
+
 -- Insert: 直前の単語を大文字化
--- =========================================================
 vim.keymap.set("i", "<C-l>", function()
   local line = vim.fn.getline(".")
   local col  = vim.fn.getpos(".")[3]
   local head = line:sub(1, col - 1)
   local word = vim.fn.matchstr(head, [[\v<(\k(<)@!)*$]])
   return "<C-w>" .. word:upper()
-end, { expr = true })
+end, { expr = true, desc = "Uppercase Previous Word" })
 
-
--- うぃんどうをトグルで最大化する
+-- ウィンドウの最大化トグル
 local maximized = false
-
 vim.keymap.set('n', '<leader>w', function()
   if maximized then
     vim.cmd('wincmd =')
@@ -220,11 +171,9 @@ vim.keymap.set('n', '<leader>w', function()
     vim.cmd('wincmd |')
     maximized = true
   end
-end)
+end, make_opts("Toggle Maximize Window"))
 
--- Filesystem を開く
-vim.keymap.set("n", "<leader>nf", ":Neotree filesystem reveal left<CR>", { desc = "Neo-tree Files" })
--- Buffers を開く
-vim.keymap.set("n", "<leader>nb", ":Neotree buffers reveal left<CR>", { desc = "Neo-tree Buffers" })
--- Git status を開く
-vim.keymap.set("n", "<leader>ng", ":Neotree git_status reveal left<CR>", { desc = "Neo-tree Git" })
+-- Neo-tree 拡張
+vim.keymap.set("n", "<leader>nf", ":Neotree filesystem reveal left<CR>", make_opts("Neo-tree Files"))
+vim.keymap.set("n", "<leader>nb", ":Neotree buffers reveal left<CR>", make_opts("Neo-tree Buffers"))
+vim.keymap.set("n", "<leader>ng", ":Neotree git_status reveal left<CR>", make_opts("Neo-tree Git"))

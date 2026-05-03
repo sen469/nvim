@@ -1,7 +1,7 @@
 -- hlchunk.nvim プラグインの設定
 return {
   "shellRaining/hlchunk.nvim",
-  event = { "UIEnter" },
+  event = { "VeryLazy" },
   config = function()
     require("hlchunk").setup({
       chunk = {

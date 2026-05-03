@@ -28,6 +28,13 @@ vim.opt.wrap = true -- 端までコードが届いた際に折り返す
 vim.opt.helplang = 'ja', 'en' -- ヘルプの言語を日本語、英語の順で適用
 vim.opt.updatetime = 300 -- イベントの更新間隔を短縮（デフォルト: 4000ms）
 vim.opt.showtabline = 2 -- タブラインを常に表示
+-- クリップボードの自動探索をスキップして高速化
+vim.g.clipboard = {
+  name = "myClipboard",
+  copy = { ["+"] = "xsel --clipboard --input", ["*"] = "xsel --primary --input" },
+  paste = { ["+"] = "xsel --clipboard --output", ["*"] = "xsel --primary --output" },
+  cache_enabled = 1,
+}
 vim.opt.clipboard = 'unnamedplus' -- クリップボードとレジスタを共有（システムクリップボード使用）
 vim.opt.termguicolors = true -- 24ビットカラーを有効化
 vim.opt.signcolumn = 'yes' -- 行番号の横に余白を確保（警告やGitの変更表示用）
@@ -45,5 +52,5 @@ vim.opt.list = true
 vim.opt.listchars = { tab = "»-", trail = "·", extends = "→", precedes = "←", space = " " }
 
 vim.opt.autoread = true
-vim.api.nvim_create_user_command('E', 'Explore', {})
+vim.api.nvim_create_user_command('E', 'Neotree', {})
 vim.opt.updatetime = 100  -- 100ms（実用的な下限）

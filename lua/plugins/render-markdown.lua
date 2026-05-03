@@ -1,15 +1,18 @@
 return {
   {
     "MeanderingProgrammer/render-markdown.nvim",
-    ft = { "markdown" },
+    ft = { "markdown", "quarto" },
     dependencies = {
       "nvim-treesitter/nvim-treesitter",
       "nvim-tree/nvim-web-devicons", -- 任意
     },
+    ---@module 'render-markdown'
+    ---@type render.md.UserConfig
     opts = {
       -- 基本
-      enabled = true,
+      enabled = false, -- デフォルトでは無効にする (ユーザー要望)
       render_modes = { "n", "c", "t" }, -- insertでは無効化（編集しやすくする）
+      file_types = { "markdown", "quarto" },
 
       -- 見出し
       heading = {
