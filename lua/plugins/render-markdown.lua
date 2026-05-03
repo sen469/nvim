@@ -5,6 +5,7 @@ return {
   ---@module 'render-markdown'
   ---@type render.md.UserConfig
   opts = {
+    enabled = false, -- デフォルトでは無効にする
     file_types = { 'markdown', 'quarto' },
   },
 }
