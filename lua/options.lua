@@ -52,5 +52,5 @@ vim.opt.list = true
 vim.opt.listchars = { tab = "»-", trail = "·", extends = "→", precedes = "←", space = " " }
 
 vim.opt.autoread = true
-vim.api.nvim_create_user_command('E', 'Neotree', {})
+vim.api.nvim_create_user_command('E', 'Oil', {})
 vim.opt.updatetime = 100  -- 100ms（実用的な下限）
