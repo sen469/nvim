@@ -26,12 +26,16 @@ require('keymaps')
 
 -- Node.js のパスを設定
 vim.g.coc_node_path = '/usr/bin/node'
---
+
 -- YAMLファイルを開いた時だけ、タブをスペースに変換する設定を有効にする
 vim.api.nvim_create_autocmd({ "FileType" }, {
   pattern = { "yaml" },
   command = "setlocal expandtab",
 })
+
+-- カレントディレクトリの設定ファイルを読み込む許可(プロジェクトルートに.nvim.luaを置く)
+vim.o.exrc = true
+vim.o.secure = true
 
 -- 起動時チェック
 if vim.fn.has("nvim") == 1 and vim.fn.glob("*.tex") ~= "" then
