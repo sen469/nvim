@@ -7,11 +7,10 @@ local events = require("luasnip.util.events")
 
 ls.add_snippets("cpp", {
 	s("kyopro", { t({
-			"#include <bits/stdc++.h>",
-			"using namespace std;",
 			"// #include <atcoder/all>",
 			"// using namespace atcoder;",
-			"",
+			"#include <bits/stdc++.h>",
+			"using namespace std;",
 			"#define rep(i, n) for(int i=0;i<(int)(n);i++)",
 			"#define rrep(i, m, n) for(int i=(int)m;i<(int)n;i++)",
 			"#define all(x) x.begin(), x.end()",
