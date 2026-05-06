@@ -7,10 +7,14 @@ return {
       chunk = {
         enable = true,
         use_treesitter = true,  -- Treesitter を使用
-        notify = true, -- notify if some situation (like disabling chunk mod twice)
+        notify = false, -- 通知を無効化して「no parser for」メッセージを抑制
         exclude_filetypes = {
           aerial = true,
           dashboard = true,
+          norg = true,
+          toml = true,
+          yaml = true,
+          json = true,
         },
         support_filetypes = { 
             "lua", 
