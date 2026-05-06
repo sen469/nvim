@@ -47,7 +47,7 @@ M.setup = function()
         lspconfig.clangd.setup({
           on_attach = on_attach,
           capabilities = capabilities,
-          cmd = { "clangd", "--offset-encoding=utf-16" },
+          cmd = { "clangd", "--offset-encoding=utf-16", "--header-insertion=never" },
         })
       end,
 
