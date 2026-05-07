@@ -58,6 +58,7 @@ return {
             -Wno-deprecated-builtins
             -Wno-bool-conversion
             -I/Users/sen46/my/kyopuro/
+            -Wshadow
           ]]
           local f = io.open(clangd_config_file, "w")
           if f then
