@@ -23,7 +23,7 @@ ls.add_snippets("cpp", {
 			"#define all(x) x.begin(), x.end()",
 			"#define rall(x) x.rbegin(), x.rend()",
 			"#define vec vector",
-			"#ifdef LOCAL",
+			"#ifdef SEN469",
 			"#include \"lib/debug.hpp\"",
 			"#else",
 			"#define dg(...)",
