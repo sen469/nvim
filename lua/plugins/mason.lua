@@ -81,6 +81,7 @@ return {
             return {
               clangd_path,
               "--compile-commands-dir=" .. compile_dir,
+              "--header-insertion=never",
             }
           end)(),
           flags = {
@@ -140,10 +141,14 @@ return {
     })
 
     -- Hover ウィンドウの見た目
-    vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
-      vim.lsp.handlers.hover,
-      { border = "rounded", max_width = 80 }
-    )
+    vim.lsp.handlers["textDocument/hover"] = function(err, result, ctx, config)
+      return vim.lsp.handlers.hover(
+        err,
+        result,
+        ctx,
+        vim.tbl_extend("force", config or {}, { border = "rounded", max_width = 80 })
+      )
+    end
 
     -- ポップアップメニューの配色
     vim.cmd('highlight link Pmenu Normal')

@@ -39,3 +39,26 @@ require('options')
 
 -- キーマップの設定
 require('keymaps')
+
+-- Fix Treesitter 'range' nil error on Neovim 0.12+
+-- This is a temporary fix until nvim-treesitter is updated
+if vim.version().minor >= 12 then
+  local ok, query = pcall(require, "vim.treesitter.query")
+  if ok then
+    local original_add_directive = query.add_directive
+    query.add_directive = function(name, handler, opts)
+      local wrapped_handler = function(match, pattern, bufnr, pred, metadata)
+        local new_match = {}
+        for i, node in pairs(match) do
+          if type(node) == "table" then
+            new_match[i] = node[1]
+          else
+            new_match[i] = node
+          end
+        end
+        return handler(new_match, pattern, bufnr, pred, metadata)
+      end
+      return original_add_directive(name, wrapped_handler, opts)
+    end
+  end
+end

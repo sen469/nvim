@@ -8,7 +8,7 @@ return {
     },
     opts = {
       -- 基本
-      enabled = true,
+      enabled = false,
       render_modes = { "n", "c", "t" }, -- insertでは無効化（編集しやすくする）
 
       -- 見出し

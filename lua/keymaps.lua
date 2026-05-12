@@ -32,6 +32,9 @@ vim.keymap.set("n", "<F1>", ":edit $MYVIMRC<CR>", { desc = "Edit Config" })
 -- ファイルツリー
 vim.keymap.set("n", "<leader>e", ":Neotree toggle<CR>", { desc = "Toggle Explorer" })
 
+-- Markdown Preview
+vim.keymap.set("n", "<leader>mp", ":MarkdownPreviewToggle<CR>", { desc = "Markdown Preview" })
+
 -- 全選択コピー
 vim.keymap.set("n", "cpal", ":%y<CR>", { desc = "Copy All" }) -- copy all
 
