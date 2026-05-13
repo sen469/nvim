@@ -16,6 +16,11 @@ vim.keymap.set("n", "sk", "<C-w>k", make_opts("Go to Upper Window"))
 vim.keymap.set("n", "sl", "<C-w>l", make_opts("Go to Right Window"))
 
 -- =========================================================
+-- 移動 (gj/gk をデフォルトに)
+vim.keymap.set({ "n", "x" }, "j", "gj", make_opts("Move Down (wrapped)"))
+vim.keymap.set({ "n", "x" }, "k", "gk", make_opts("Move Up (wrapped)"))
+
+-- =========================================================
 -- Insert mode
 vim.keymap.set("i", "jk", "<Esc>", make_opts("Exit Insert Mode"))
 
