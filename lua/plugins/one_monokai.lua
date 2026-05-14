@@ -92,7 +92,7 @@ return {
       vim.api.nvim_set_hl(0, "@keyword.return",    { fg = colors.orange_red, italic = false })
       vim.api.nvim_set_hl(0, "@preproc",           { fg = colors.orange_red, italic = false })
       vim.api.nvim_set_hl(0, "@include",           { fg = colors.orange_red, italic = false })
-      vim.api.nvim_set_hl(0, "@define",            { fg = colors.orange_red, italic = false })
+      vim.api.nvim_set_hl(0, "@keyword.directive.define",            { fg = colors.orange_red, italic = false }) -- NOTE:
       vim.api.nvim_set_hl(0, "@repeat",            { fg = colors.orange_red, italic = false })
       vim.api.nvim_set_hl(0, "@conditional",       { fg = colors.orange_red, italic = false })
       vim.api.nvim_set_hl(0, "@keyword.typedef",   { fg = colors.orange_red, italic = false })
@@ -104,6 +104,8 @@ return {
       vim.api.nvim_set_hl(0, "@type.builtin",      { fg = colors.cyan, italic = false })
       vim.api.nvim_set_hl(0, "@function",          { fg = colors.cyan, italic = false })
       vim.api.nvim_set_hl(0, "@structure",         { fg = colors.cyan, italic = false })
+      vim.api.nvim_set_hl(0, "@keyword.type",           { fg = colors.cyan, italic = false }) -- NOTE:
+      vim.api.nvim_set_hl(0, "@constant.builtin",      { fg = colors.cyan, italic = false })
 
       -- 4. ユーザー定義型, 組み込み変数 (Blue)
       vim.api.nvim_set_hl(0, "@type",              { fg = colors.blue, italic = false })
@@ -113,6 +115,10 @@ return {
       vim.api.nvim_set_hl(0, "@variable",               { fg = colors.white, italic = false })
       vim.api.nvim_set_hl(0, "@punctuation.delimiter",  { fg = colors.white, italic = false })
       vim.api.nvim_set_hl(0, "@namespace",              { fg = colors.white, italic = false })
+
+      -- 6. 関数 (Green)
+      vim.api.nvim_set_hl(0, "@function",              { fg = colors.green, italic = false })
+
 
 
       -- -----------------------------------------------------------------------
