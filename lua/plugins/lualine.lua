@@ -4,7 +4,7 @@ return {
     dependencies = { 'nvim-tree/nvim-web-devicons' },
     config = function()
         local function clock()
-            return os.date("%H:%M")
+            return os.date("%Y/%m/%d %H:%M:%S")
         end
 
         require('lualine').setup {
