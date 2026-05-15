@@ -115,6 +115,7 @@ return {
       vim.api.nvim_set_hl(0, "@variable",               { fg = colors.white, italic = false })
       vim.api.nvim_set_hl(0, "@punctuation.delimiter",  { fg = colors.white, italic = false })
       vim.api.nvim_set_hl(0, "@namespace",              { fg = colors.white, italic = false })
+      vim.api.nvim_set_hl(0, "@module",              { fg = colors.white, italic = false })
 
       -- 6. 関数 (Green)
       vim.api.nvim_set_hl(0, "@function",              { fg = colors.green, italic = false })
