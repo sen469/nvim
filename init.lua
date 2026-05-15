@@ -62,3 +62,14 @@ if vim.version().minor >= 12 then
     end
   end
 end
+
+-- ==============================================================
+-- プロジェクトごとの設定 (.nvim.lua) を読み込む
+-- プロジェクトルート（.git または .nvim.lua がある場所）を検索して、確認後に実行する
+local local_config = vim.fs.find('.nvim.lua', { upward = true, stop = vim.uv.os_homedir() })[1]
+if local_config then
+  local choice = vim.fn.confirm("ローカル設定ファイル (.nvim.lua) を読み込みますか？\n" .. local_config, "&Yes\n&No", 2)
+  if choice == 1 then
+    dofile(local_config)
+  end
+end
