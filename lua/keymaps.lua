@@ -35,6 +35,9 @@ vim.keymap.set("n", "<leader>e", ":Neotree toggle<CR>", { desc = "Toggle Explore
 -- LazyGit
 vim.keymap.set("n", "<leader>gg", ":LazyGit<CR>", { desc = "LazyGit" })
 
+-- Git Blame
+vim.keymap.set("n", "<leader>gb", ":GitBlameToggle<CR>", { desc = "Toggle Git Blame" })
+
 -- Markdown Preview
 vim.keymap.set("n", "<leader>mp", ":MarkdownPreviewToggle<CR>", { desc = "Markdown Preview" })
 
