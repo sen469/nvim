@@ -5,6 +5,14 @@ return
     event = "VeryLazy",
     config = function()
       require("gitsigns").setup({
+        current_line_blame = true,
+        current_line_blame_opts = {
+          virt_text = true,
+          virt_text_pos = "eol",
+          delay = 500,
+          ignore_whitespace = false,
+        },
+        current_line_blame_formatter = "<author>, <author_time:%Y-%m-%d> - <summary>",
         on_attach = function(bufnr)
           local gs = package.loaded.gitsigns
 
@@ -36,7 +44,7 @@ return
           map('n', '<leader>gu', gs.undo_stage_hunk, {desc = "Undo Stage Hunk"})
           map('n', '<leader>gR', gs.reset_buffer, {desc = "Reset Buffer"})
           map('n', '<leader>gp', gs.preview_hunk, {desc = "Preview Hunk"})
-          map('n', '<leader>gb', function() gs.blame_line{full=true} end, {desc = "Blame Line"})
+          map('n', '<leader>gb', function() gs.blame_line({ full = true }) end, {desc = "Blame Current Line"})
           map('n', '<leader>tb', gs.toggle_current_line_blame, {desc = "Toggle Line Blame"})
           map('n', '<leader>gd', gs.diffthis, {desc = "Git Diff"})
           map('n', '<leader>gD', function() gs.diffthis('~') end, {desc = "Git Diff (Parent)"})
