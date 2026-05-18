@@ -1,41 +1,68 @@
 -- nvim/lua/plugins/treesitter.lua
-return {
-    "nvim-treesitter/nvim-treesitter",
-    event = { "BufReadPost", "BufNewFile" },
-    build = ":TSUpdate",
-    config = function()
-        local configs = require("nvim-treesitter.configs")
-        configs.setup({
-            ensure_installed = { "c", "lua", "vim", "javascript", "html", "cpp", "python", "markdown", "markdown_inline", "latex", "bibtex" },
-            sync_install = false,
-            highlight = {
-                enable = true,
-				disable = {
-					-- 'cpp',
-					-- 'c',
-				},
-                -- ここを false にすると、Vim のハイライト（=カラースキーム）が優先される
-                -- additional_vim_regex_highlighting = true,
-                additional_vim_regex_highlighting = false,
-            },
-            indent = { enable = false },
-            fold = { enable = true },
-            
-            -- ▼▼▼ ここを修正 ▼▼▼
-            -- rainbow モジュールを無効にする
-            -- (HiPhish/rainbow-delimiters.nvim を優先するため)
-            rainbow = {
-                enable = false, -- true から false に変更
-                -- extended_mode = false, 
-                -- max_file_lines = nil, 
-                -- colors = { ... },
-            }
-            -- ▲▲▲ ここまで修正 ▲▲▲
-        })
+local ensure_installed = {
+  "c",
+  "lua",
+  "vim",
+  "javascript",
+  "html",
+  "cpp",
+  "python",
+  "markdown",
+  "markdown_inline",
+  "latex",
+  "bibtex",
+}
 
-        vim.opt.foldmethod = "expr"
-        vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
-        vim.opt.foldenable = true
-        vim.opt.foldlevel = 99
+local tree_sitter_filetypes = {
+  "c",
+  "cpp",
+  "lua",
+  "vim",
+  "javascript",
+  "html",
+  "python",
+  "markdown",
+  "tex",
+  "bib",
+}
+
+return {
+  "nvim-treesitter/nvim-treesitter",
+  lazy = false,
+  build = ":TSUpdate",
+  config = function()
+    local treesitter = require("nvim-treesitter")
+
+    treesitter.setup({
+      install_dir = vim.fn.stdpath("data") .. "/site",
+    })
+
+    local installed = {}
+    for _, parser in ipairs(treesitter.get_installed("parser")) do
+      installed[parser] = true
     end
+
+    local missing = vim.tbl_filter(function(parser)
+      return not installed[parser]
+    end, ensure_installed)
+
+    if #missing > 0 then
+      treesitter.install(missing)
+    end
+
+    vim.api.nvim_create_autocmd("FileType", {
+      pattern = tree_sitter_filetypes,
+      callback = function()
+        local ok = pcall(vim.treesitter.start)
+        if not ok then
+          return
+        end
+
+        vim.wo.foldmethod = "expr"
+        vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+        vim.wo.foldenable = true
+        vim.wo.foldlevel = 99
+      end,
+    })
+  end,
 }
