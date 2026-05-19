@@ -9,6 +9,8 @@ ls.add_snippets("cpp", {
 	s("kyopro", { t({
 			"// #include <atcoder/all>",
 			"// using namespace atcoder;",
+			"// #include \"lib/all\"",
+			"// using namespace kyopro;",
 			"#include <bits/stdc++.h>",
 			"using namespace std;",
 			"#define rep1(n) for (int __ = 0; __ < (int)(n); ++__)",
@@ -24,7 +26,7 @@ ls.add_snippets("cpp", {
 			"#define rall(x) x.rbegin(), x.rend()",
 			"#define vec vector",
 			"#ifdef SEN469",
-			"#include \"lib/debug.hpp\"",
+			"#include \"lib/debug/debug.hpp\"",
 			"#else",
 			"#define dg(...)",
 			"#endif",
