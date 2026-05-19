@@ -90,30 +90,6 @@ return {
         })
       end,
 
-      ["rust_analyzer"] = function()
-        lspconfig.rust_analyzer.setup({
-          on_attach = on_attach,
-          capabilities = capabilities,
-          settings = {
-            ["rust-analyzer"] = {
-              cargo = { allFeatures = true, loadOutDirsFromCheck = true, runBuildScripts = true },
-              procMacro = { enable = true },
-              check = { command = "clippy" },
-              diagnostics = { disabled = { "unresolved-proc-macro" } },
-              completion = { postfix = { enable = true } },
-              hover = { actions = { references = true } },
-              inlayHints = {
-                enable = true,
-                parameterHints = true,
-                chainingHints = true,
-                closingBraceHints = { enable = true, minLines = 2 },
-              },
-              lens = { enable = true },
-            },
-          },
-        })
-      end,
-
       ["matlab_ls"] = function()
         local matlab_path = "/Applications/MATLAB_R2025a.app"
         if vim.fn.has("mac") == 1 and vim.fn.isdirectory(matlab_path) == 0 then
