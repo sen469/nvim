@@ -26,7 +26,11 @@ return {
           visible = false,
           hide_dotfiles = false,
           hide_gitignored = true,
-          hide_by_name = { "node_modules" },
+          hide_by_name = {
+            "node_modules",
+            ".git",
+            ".vscode",
+          },
         },
       },
       window = {
@@ -40,6 +44,7 @@ return {
           ["R"] = "refresh",
           ["q"] = "close_window",
           ["<Tab>"] = "preview",
+          ["H"] = "toggle_hidden",
         },
       },
       git_status = {
