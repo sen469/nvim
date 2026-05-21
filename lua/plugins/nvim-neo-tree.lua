@@ -1,8 +1,7 @@
 return {
   "nvim-neo-tree/neo-tree.nvim",
   branch = "v3.x",
-  -- cmd = "Neotree", -- ディレクトリ指定での起動に対応するため、コマンドでの遅延読み込みを解除
-  lazy = false, -- 起動時に読み込む
+  cmd = "Neotree",
   keys = {
     { "<leader>e", ":Neotree toggle<CR>", desc = "Toggle Neo-tree" },
     { "\\e", ":Neotree toggle<CR>", desc = "Toggle Neo-tree" },

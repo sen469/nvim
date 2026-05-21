@@ -8,7 +8,7 @@ return {
   },
   -- Optional dependencies
   dependencies = { "nvim-tree/nvim-web-devicons" }, -- use if prefer nvim-web-devicons
-  lazy = false,
+  cmd = "Oil",
   keys = {
     { "-", "<CMD>Oil<CR>", desc = "Open parent directory" },
   },

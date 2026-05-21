@@ -17,6 +17,22 @@ require("lazy").setup({
   require("plugins")
 })
 
+local function is_directory_startup()
+  local dir = vim.fn.argv(0)
+  return vim.fn.argc() == 1 and dir ~= "" and vim.fn.isdirectory(dir) == 1
+end
+
+vim.api.nvim_create_autocmd("VimEnter", {
+  once = true,
+  callback = function()
+    if is_directory_startup() then
+      vim.schedule(function()
+        vim.cmd("Neotree filesystem reveal left dir=" .. vim.fn.fnameescape(vim.fn.argv(0)))
+      end)
+    end
+  end,
+})
+
 -- ==============================================================
 -- 基本オプションの設定
 require('options')

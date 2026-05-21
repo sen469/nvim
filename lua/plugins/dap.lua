@@ -152,11 +152,13 @@ return {
 
   {
     "rcarriga/nvim-dap-ui",
+    lazy = true,
     dependencies = { "mfussenegger/nvim-dap" },
   },
 
   {
     "jay-babu/mason-nvim-dap.nvim",
+    lazy = true,
     dependencies = {
       "williamboman/mason.nvim",
       "mfussenegger/nvim-dap",
