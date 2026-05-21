@@ -4,7 +4,6 @@ local luasnip = require("luasnip")
 require("snippets.cpp")
 require("snippets.c")
 require("snippets.python")
-require("snippets.rust")
 require("snippets.tex")
 require("snippets.sh")
 
@@ -14,14 +13,12 @@ vim.api.nvim_create_user_command("LuaSnipReload", function()
   package.loaded["snippets.cpp"] = nil
   package.loaded["snippets.c"] = nil
   package.loaded["snippets.python"] = nil
-  package.loaded["snippets.rust"] = nil
   package.loaded["snippets.tex"] = nil
   package.loaded["snippets.sh"] = nil
 
   require("snippets.cpp")
   require("snippets.c")
   require("snippets.python")
-  require("snippets.rust")
   require("snippets.tex")
   require("snippets.sh")
   print("LuaSnip snippets reloaded!")
