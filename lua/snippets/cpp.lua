@@ -63,8 +63,16 @@ ls.add_snippets("cpp", {
 			"int main()",
 			"{",
 		}),
-		i(0),
+		i(0, nil, {
+			node_callbacks = {
+				[events.enter] = function()
+					-- カーソルを挿入後にカーソルの場所を画面上部にする
+					vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>zt", true, false, true), "n", true)
+				end
+			}
+		}),
 		t({
+			"",
 			"",
 			"\treturn (0);",
 			"}"
