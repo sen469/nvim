@@ -11,6 +11,7 @@ ls.add_snippets("cpp", {
 			"// using namespace atcoder;",
 			"// #include \"lib/all\"",
 			"// using namespace kyopro;",
+			"// 998244353 1000000007",
 			"#include <bits/stdc++.h>",
 			"using namespace std;",
 			"#define rep1(n) for (int __ = 0; __ < (int)(n); ++__)",
@@ -18,7 +19,9 @@ ls.add_snippets("cpp", {
 			"#define rep3(i, a, b) for (int i = (int)(a); i < (int)(b); ++i)",
 			"#define rep(...) GET_MACRO(__VA_ARGS__, rep3, rep2, rep1)(__VA_ARGS__)",
 			"#define rrep1(n) for (int __ = (int)(n) - 1; __ >= 0; --__)",
-			"#define rrep2(i, n) for (int i = (int)(n) - 1; i >= 0; --i)", "#define rrep3(i, a, b) for (int i = (int)(b) - 1; i >= (int)(a); --i)", "#define rrep(...) GET_MACRO(__VA_ARGS__, rrep3, rrep2, rrep1)(__VA_ARGS__)",
+			"#define rrep2(i, n) for (int i = (int)(n) - 1; i >= 0; --i)",
+			"#define rrep3(i, a, b) for (int i = (int)(b) - 1; i >= (int)(a); --i)",
+			"#define rrep(...) GET_MACRO(__VA_ARGS__, rrep3, rrep2, rrep1)(__VA_ARGS__)",
 			"#define GET_MACRO(_1, _2, _3, NAME, ...) NAME",
 			"#define all(x) x.begin(), x.end()",
 			"#define rall(x) x.rbegin(), x.rend()",
@@ -71,8 +74,8 @@ ls.add_snippets("cpp", {
 
 	s("dxdy", {
 		t({
-			"const int dx[4] = {1, 0, -1, 0};",
-			"const int dy[4] = {0, 1, 0, -1};",
+			"const int dx[8] = {1, 0, -1, 0, 1, 1, -1, -1};",
+			"const int dy[8] = {0, 1, 0, -1, 1, -1, 1, -1};",
 			"",
 		})
 	}),
