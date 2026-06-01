@@ -24,7 +24,7 @@ vim.keymap.set('v', 'j', 'gj', { noremap = true, silent = true })
 vim.keymap.set('v', 'k', 'gk', { noremap = true, silent = true })
 
 -- jkでEsc
-vim.keymap.set("i", "jk", "<Esc>", { desc = "Exit Insert Mode" })
+-- vim.keymap.set("i", "jk", "<Esc>", { desc = "Exit Insert Mode" })
 
 -- 設定ファイルを開く
 vim.keymap.set("n", "<F1>", ":edit $MYVIMRC<CR>", { desc = "Edit Config" })
