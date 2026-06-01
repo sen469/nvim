@@ -57,7 +57,8 @@ return {
             -Wno-invalid-constexpr
             -Wno-deprecated-builtins
             -Wno-bool-conversion
-            -I/Users/sen46/my/kyopuro/
+            -I/Users/sen46/my/kyopro/
+            -I/Users/sen46/my/kyopro/lib
             -Wshadow
           ]]
           local f = io.open(clangd_config_file, "w")
