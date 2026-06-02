@@ -22,7 +22,7 @@ vim.keymap.set({ "n", "x" }, "k", "gk", make_opts("Move Up (wrapped)"))
 
 -- =========================================================
 -- Insert mode
-vim.keymap.set("i", "jk", "<Esc>", make_opts("Exit Insert Mode"))
+-- vim.keymap.set("i", "jk", "<Esc>", make_opts("Exit Insert Mode"))
 
 -- =========================================================
 -- 設定ファイル
