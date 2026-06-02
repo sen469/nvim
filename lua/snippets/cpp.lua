@@ -11,6 +11,7 @@ ls.add_snippets("cpp", {
 			"// using namespace atcoder;",
 			"// #include \"lib/all\"",
 			"// using namespace kyopro;",
+			"// 998244353 1000000007 2147483647 4294967295 9223372036854775807 18446744073709551615",
 			"#include <bits/stdc++.h>",
 			"using namespace std;",
 			"#define rep1(n) for (int __ = 0; __ < (int)(n); ++__)",
