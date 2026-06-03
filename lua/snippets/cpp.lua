@@ -100,14 +100,17 @@ ls.add_snippets("cpp", {
 	s("ipow", {
 		t({
 			"template<typename T>",
-			"T ipow(T a, long long b){",
-			"\tT res = 1;",
-			"\twhile(b > 0){",
-			"\t\tif(b & 1) res *= a;",
-			"\t\ta *= a;",
+			"T ipow(T a, long long b)",
+			"{",
+			"\tT ret = 1;",
+			"\twhile (b > 0)",
+			"\t{",
+			"\t\tif (b & 1)",
+			"\t\t\tret *= a;",
+			"\t\ta *= a, b >>= 1;",
 			"\t\tb >>= 1;",
 			"\t}",
-			"\treturn (res);",
+			"\treturn (ret);",
 			"}",
 			"",
 		})
