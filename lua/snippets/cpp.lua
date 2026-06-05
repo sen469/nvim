@@ -11,7 +11,7 @@ ls.add_snippets("cpp", {
 			"// using namespace atcoder;",
 			"// #include \"lib/all\"",
 			"// using namespace kyopro;",
-			"// 998244353 1000000007",
+			"// 998244353 1000000007 2147483647 4294967295 9223372036854775807 18446744073709551615",
 			"#include <bits/stdc++.h>",
 			"using namespace std;",
 			"#define rep1(n) for (int __ = 0; __ < (int)(n); ++__)",
@@ -64,8 +64,15 @@ ls.add_snippets("cpp", {
 			"int main()",
 			"{",
 		}),
-		i(0),
+		i(0, nil, {
+			node_callbacks = {
+				[events.enter] = function()
+					vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>zt", true, false, true), "n", true)
+				end
+			}
+		}),
 		t({
+			"",
 			"",
 			"\treturn (0);",
 			"}"
@@ -89,17 +96,20 @@ ls.add_snippets("cpp", {
 	}} while ({});
 	]], { i(2), i(1) })),
 
-	s("ipow", {
+    s("ipow", {
 		t({
 			"template<typename T>",
-			"T ipow(T a, long long b){",
-			"\tT res = 1;",
-			"\twhile(b > 0){",
-			"\t\tif(b & 1) res *= a;",
+			"T ipow(T a, long long b)",
+			"{",
+			"\tT ret = 1;",
+			"\twhile (b > 0)",
+			"\t{",
+			"\t\tif (b & 1)",
+			"\t\t\tret *= a;",
 			"\t\ta *= a;",
 			"\t\tb >>= 1;",
 			"\t}",
-			"\treturn (res);",
+			"\treturn (ret);",
 			"}",
 			"",
 		})
