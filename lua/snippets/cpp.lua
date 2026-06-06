@@ -6,7 +6,7 @@ local fmt = require("luasnip.extras.fmt").fmt
 local events = require("luasnip.util.events")
 
 ls.add_snippets("cpp", {
-	s("kyopro", { t({
+	s({ trig = "kr", dscr = "競プロテンプレート" }, { t({
 			"// #include <atcoder/all>",
 			"// using namespace atcoder;",
 			"// #include \"lib/all\"",
