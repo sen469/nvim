@@ -13,11 +13,11 @@ return {
       -- 表示する行数の上限 (0は無制限)
       max_lines = 0,
       -- ウィンドウの高さがこれ以下の場合は無効化
-      min_window_height = 0,
+      min_window_height = 20,
       -- 行番号を表示
       line_numbers = true,
       -- 複数行のコンテキストの最大行数
-      multiline_threshold = 20,
+      multiline_threshold = 1,
       -- 上限を超えた場合に削除するスコープ ('inner' or 'outer')
       trim_scope = 'outer',
       -- コンテキストの計算基準 ('cursor' or 'topline')
