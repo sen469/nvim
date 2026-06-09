@@ -177,6 +177,11 @@ vim.keymap.set("i", "<C-l>",
     {expr = true}
 )
 
+-- 診断（エラー/警告）の移動
+vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Previous Diagnostic" })
+vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Next Diagnostic" })
+vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, { desc = "Show Diagnostic Floating Window" })
+
 -- トグルでウィンドウのサイズを最大化
 local maximized = false
 
