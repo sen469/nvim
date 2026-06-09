@@ -4,6 +4,7 @@ set relativenumber
 set showmatch
 set cursorline
 set ruler
+set scrolloff=999
 syntax on
 
 " --- インデント・タブ設定 ---
@@ -34,6 +35,8 @@ set nowritebackup
 
 set list
 set listchars=tab:^-
+" 改行時の自動コメントアウトをオフ
+autocmd FileType * setlocal formatoptions-=r formatoptions-=o
 " --------------------------------------------------
 " habamaxをone-monokai風にする設定
 " --------------------------------------------------
