@@ -33,6 +33,10 @@ return {
     -- 現在行の行番号を黄色で強調
     vim.api.nvim_set_hl(0, "CursorLineNr", { fg = "#ffff80", bold = true })
 
+    -- 対応する括弧の強調設定 (MatchParen)
+    -- 背景色を思いっきり目立つ色（明るい水色系）に変更
+    vim.api.nvim_set_hl(0, "MatchParen", { fg = "#FFFFFF", bg = "#007acc", bold = true })
+
 
     -- =========================================================================
     -- 3. UI・メニュー周り (補完・Telescope)

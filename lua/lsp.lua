@@ -67,7 +67,7 @@ M.setup = function()
 
   -- エラー表示（診断）のデザイン設定
   vim.diagnostic.config({
-    virtual_text = { prefix = "●" },
+    virtual_text = false,
     signs = true,
     underline = true,
     update_in_insert = false,

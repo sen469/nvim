@@ -25,6 +25,11 @@ vim.keymap.set({ "n", "x" }, "k", "gk", make_opts("Move Up (wrapped)"))
 -- vim.keymap.set("i", "jk", "<Esc>", make_opts("Exit Insert Mode"))
 
 -- =========================================================
+-- Diagnostic (エラー等)
+vim.keymap.set("n", "[d", function() vim.diagnostic.goto_prev({ float = false }) end, make_opts("Go to Previous Diagnostic"))
+vim.keymap.set("n", "]d", function() vim.diagnostic.goto_next({ float = false }) end, make_opts("Go to Next Diagnostic"))
+
+-- =========================================================
 -- 設定ファイル
 vim.keymap.set("n", "<F1>", ":edit $MYVIMRC<CR>", make_opts("Edit Config (init.lua)"))
 
