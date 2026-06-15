@@ -33,7 +33,8 @@ return {
 
     -- 現在行の行番号を黄色で強調
     vim.api.nvim_set_hl(0, "CursorLineNr", { fg = "#ffff80", bold = true })
-
+    -- 対応するかっこの色を変更する
+    vim.api.nvim_set_hl(0, "MatchParen", { fg = "#FFFFFF", bg = "#007acc", bold = true })
 
     -- =========================================================================
     -- 3. UI・メニュー周り (補完・Telescope)
