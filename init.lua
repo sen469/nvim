@@ -65,11 +65,16 @@ end
 
 -- ==============================================================
 -- プロジェクトごとの設定 (.nvim.lua) を読み込む
--- プロジェクトルート（.git または .nvim.lua がある場所）を検索して、確認後に実行する
+-- プロジェクトルート（.git または .nvim.lua がある場所）を検索して、一度許可したファイルは自動で読み込む
 local local_config = vim.fs.find('.nvim.lua', { upward = true, stop = vim.uv.os_homedir() })[1]
 if local_config then
-  local choice = vim.fn.confirm("ローカル設定ファイル (.nvim.lua) を読み込みますか？\n" .. local_config, "&Yes\n&No", 2)
-  if choice == 1 then
-    dofile(local_config)
+  local content = vim.secure.read(local_config)
+  if content then
+    local chunk, err = loadstring(content)
+    if chunk then
+      chunk()
+    else
+      vim.notify("Error loading .nvim.lua: " .. err, vim.log.levels.ERROR)
+    end
   end
 end
