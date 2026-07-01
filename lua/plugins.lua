@@ -38,6 +38,7 @@ local plugins = {
   "plugins.treesj",
   "plugins.vimtex",
   "plugins.which-key",
+  "plugins.zen-mode",
   "plugins.fugitive",
 }
 
