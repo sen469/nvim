@@ -25,6 +25,8 @@ ls.add_snippets("cpp", {
             "#define GET_MACRO(_1, _2, _3, NAME, ...) NAME",
             "#define all(x) x.begin(), x.end()",
             "#define rall(x) x.rbegin(), x.rend()",
+            "#define Min(x) *min_element(all(x))",
+            "#define Max(x) *max_element(all(x))",
             "#define vec vector",
             "#ifdef SEN469",
             "#include \"lib/debug/debug.hpp\"",

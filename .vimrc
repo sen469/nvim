@@ -13,7 +13,7 @@ nmap <Esc><Esc> :nohlsearch<CR><Esc>
 set smartindent
 set tabstop=4
 set shiftwidth=4
-set noexpandtab
+" set noexpandtab
 set softtabstop=4
 
 filetype plugin indent on
