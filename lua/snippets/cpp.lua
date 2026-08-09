@@ -6,7 +6,7 @@ local fmt = require("luasnip.extras.fmt").fmt
 local events = require("luasnip.util.events")
 
 ls.add_snippets("cpp", {
-    s({ trig = "kr", dscr = "競プロテンプレート" }, { t({
+	s("kr", { t({
             "// #include <atcoder/all>",
             "// using namespace atcoder;",
             "// #include \"lib/all\"",
@@ -89,7 +89,6 @@ ls.add_snippets("cpp", {
         }),
         t({
             "",
-            -- "",
             "\treturn (0);",
             "}"
         }),
@@ -102,15 +101,6 @@ ls.add_snippets("cpp", {
             "",
         })
     }),
-
-    s("else", t({"else", ""})),
-    s("else if", t({"else if", ""})),
-    s("do", fmt([[
-    do
-    {{
-        {}
-    }} while ({});
-    ]], { i(2), i(1) })),
 
     s("ipow", {
         t({
@@ -129,29 +119,5 @@ ls.add_snippets("cpp", {
             "}",
             "",
         })
-    }),
-    s("try", {
-            t({
-                "try",
-                "{",
-                "\t"
-            }),
-            i(1, "/* statements */"),
-            t({
-                "",
-                "}",
-                "catch ("
-            }),
-            i(2, "const std::exception& e"),
-            t({
-                ")",
-                "{",
-                "\t"
-            }),
-            i(0),
-            t({
-                "",
-                "}"
-            }),
     }),
 })

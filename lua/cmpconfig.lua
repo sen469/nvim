@@ -5,7 +5,7 @@ M.setup = function()
   local luasnip = require'luasnip' -- LuaSnip を require して変数に格納
 
   cmp.setup({
-    preselect = cmp.PreselectMode.None, -- 最初の候補が選択されるようにした
+    preselect = cmp.PreselectMode.None, -- 最初の候補を自動選択しない
 
     snippet = {
       expand = function(args)
@@ -19,7 +19,7 @@ M.setup = function()
       ['<C-f>'] = cmp.mapping.scroll_docs(4),
       ['<C-Space>'] = cmp.mapping.complete(),
       ['<C-e>'] = cmp.mapping.close(),
-      ['<CR>'] = cmp.mapping.confirm({ select = true }),
+      ['<CR>'] = cmp.mapping.confirm({ select = false }),
 
       -- Tab キーでスニペット展開・補完リスト移動
       ['<Tab>'] = function(fallback)
