@@ -48,12 +48,12 @@ return {
             -Wall
             -Wextra
             --gcc-toolchain=/opt/homebrew/opt/gcc
-            -I/opt/homebrew/opt/gcc/include/c++/15/aarch64-apple-darwin24
+            -I/opt/homebrew/opt/gcc/include/c++/16/aarch64-apple-darwin25
             -I./
             -stdlib=libstdc++
-            -I/opt/homebrew/Cellar/gcc/15.1.0/include/c++/15
-            -I/opt/homebrew/Cellar/gcc/15.1.0/include/c++/15/aarch64-apple-darwin24/
-            -I/opt/homebrew/Cellar/gcc/15.1.0/lib/gcc/15/include
+            -I/opt/homebrew/Cellar/gcc/16.1.0/include/c++/16
+            -I/opt/homebrew/Cellar/gcc/16.1.0/include/c++/16/aarch64-apple-darwin25/
+            -I/opt/homebrew/Cellar/gcc/16.1.0/lib/gcc/16/include
             -Wno-invalid-constexpr
             -Wno-deprecated-builtins
             -Wno-bool-conversion
