@@ -62,6 +62,7 @@ end, make_opts("Toggle Neo-tree"))
 vim.keymap.set("n", "cpal", ":%y<CR>", make_opts("Copy All Text"))
 vim.keymap.set("n", "clr",  ":%d<CR>", make_opts("Clear All Text"))
 vim.keymap.set("n", "pal", "ggVGp<CR>", make_opts("Paste All Text"))
+vim.keymap.set("n", "<Esc>", ":noh<CR>", make_opts("Clear search highlight"))
 
 -- =========================================================
 -- バッファ操作ロジック
