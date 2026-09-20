@@ -71,7 +71,6 @@ ls.add_snippets("cpp", {
             "\t\tos << v[i] << (i == (int)v.size() - 1 ? \"\" : \" \");",
             "\treturn (os);",
             "}",
-            "",
             "void solve();",
             "int main()",
             "{",
@@ -83,6 +82,7 @@ ls.add_snippets("cpp", {
             "\t}",
             "\treturn (0);",
             "}",
+            "",
             "void solve()",
             "{",
         }),
@@ -95,6 +95,7 @@ ls.add_snippets("cpp", {
             }
         }),
         t({
+            "",
             "",
             "}"
         }),
