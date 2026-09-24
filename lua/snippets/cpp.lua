@@ -40,14 +40,10 @@ ls.add_snippets("cpp", {
             "#endif",
             "#define INF 1001001001",
             "#define INFF 1001001001001001001LL",
-            "#define RESET \"\\033[0m\"",
-            "#define RED \"\\033[31m\"",
-            "#define GREEN \"\\033[32m\"",
-            "#define YELLOW \"\\033[33m\"",
-            "#define BLUE \"\\033[34m\"",
-            "#define MAGENTA \"\\033[35m\"",
-            "#define CYAN \"\\033[36m\"",
-            "#define WHITE \"\\033[37m\"",
+            "#define RESET \"\033[0m\"",
+            "#define RED \"\033[31m\"",
+            "#define GREEN \"\033[32m\"",
+            "#define YELLOW \"\033[33m\"",
             "using ll = long long;",
             "using ull = unsigned long long;",
             "using ld = long double;",
@@ -61,22 +57,37 @@ ls.add_snippets("cpp", {
             "void YN(bool b) { cout << (b ? \"YES\" : \"NO\") << endl; }",
             "void Yn(bool b) { cout << (b ? \"Yes\" : \"No\") << endl; }",
             "void yn(bool b) { cout << (b ? \"yes\" : \"no\") << endl; }",
+            "template <typename T>",
+            "auto make_vec(size_t n) { return (std::vector<T>(n)); }",
+            "template <typename T, typename... Args>",
+            "auto make_vec(size_t n, Args... args) { return (std::vector<decltype(make_vec<T>(args...))>(n, make_vec<T>(args...))); }",
             "template<typename T>",
             "istream &operator>>(istream &is, vec<T> &v)",
             "{",
-            "\tfor (int i = 0; i < (int)v.size(); i++)",
-            "\t\tis >> v[i];",
-            "\treturn (is);",
+            "	for (int i = 0; i < (int)v.size(); i++)",
+            "		is >> v[i];",
+            "	return (is);",
             "}",
             "template<typename T>",
             "ostream &operator<<(ostream &os, vec<T> &v)",
             "{",
-            "\tfor (int i = 0; i < (int)v.size(); i++)",
-            "\t\tos << v[i] << (i == (int)v.size() - 1 ? \"\" : \" \");",
-            "\treturn (os);",
+            "	for (int i = 0; i < (int)v.size(); i++)",
+            "		os << v[i] << (i == (int)v.size() - 1 ? \"\" : \" \");",
+            "	return (os);",
+            "}",
+            "void solve();",
+            "int main()",
+            "{",
+            "	int t = 1;",
+            "	// cin >> t;",
+            "	while (t--)",
+            "	{",
+            "		solve();",
+            "	}",
+            "	return (0);",
             "}",
             "",
-            "int main()",
+            "void solve()",
             "{",
         }),
         i(0, nil, {
@@ -89,69 +100,35 @@ ls.add_snippets("cpp", {
         }),
         t({
             "",
-            -- "",
-            "\treturn (0);",
+            "",
             "}"
         }),
     }),
 
-	s("dxdy", {
-		t({
-			"const int dx[8] = {1, 0, -1, 0, 1, 1, -1, -1};",
-			"const int dy[8] = {0, 1, 0, -1, 1, -1, 1, -1};",
-			"",
-		})
-	}),
-
-	s("else", t({"else", ""})),
-	s("else if", t({"else if", ""})),
-	s("do", fmt([[
-	do
-	{{
-		{}
-	}} while ({});
-	]], { i(2), i(1) })),
+    s("dxdy", {
+        t({
+            "const int dx[8] = {1, 0, -1, 0, 1, 1, -1, -1};",
+            "const int dy[8] = {0, 1, 0, -1, 1, -1, 1, -1};",
+            "",
+        })
+    }),
 
     s("ipow", {
-		t({
-			"template<typename T>",
-			"T ipow(T a, long long b)",
-			"{",
-			"\tT ret = 1;",
-			"\twhile (b > 0)",
-			"\t{",
-			"\t\tif (b & 1)",
-			"\t\t\tret *= a;",
-			"\t\ta *= a;",
-			"\t\tb >>= 1;",
-			"\t}",
-			"\treturn (ret);",
-			"}",
-			"",
-		})
-	}),
-	s("try", {
-			t({
-				"try",
-				"{",
-				"\t"
-			}),
-			i(1, "/* statements */"),
-			t({
-				"",
-				"}",
-				"catch ("
-			}),
-			i(2, "const std::exception& e"),
-			t({
-				")",
-				"{",
-				"\t"
-			}),
-			i(0),
-			t({
-				"",
-				"}"
-			}),
-	}),
+        t({
+            "template<typename T>",
+            "T ipow(T a, long long b)",
+            "{",
+            "	T ret = 1;",
+            "	while (b > 0)",
+            "	{",
+            "		if (b & 1)",
+            "			ret *= a;",
+            "		a *= a, b >>= 1;",
+            "		b >>= 1;",
+            "	}",
+            "	return (ret);",
+            "}",
+            "",
+        })
+    }),
 })
