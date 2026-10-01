@@ -1,6 +1,10 @@
 -- Leader キーの設定 (プラグインのロード前に必要)
 vim.g.mapleader = "\\"
 
+vim.api.nvim_create_user_command("CheckTools", function()
+  vim.cmd("checkhealth nvim_tools")
+end, { desc = "この設定で必要な外部ツールと導入状況を表示" })
+
 -- Lazy.nvim のパスを設定
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then

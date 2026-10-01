@@ -1,4 +1,30 @@
-# Neovim Keybindings
+# Neovim Configuration
+
+## 別のマシンで必要なツールを確認する
+
+Neovim 内で `:CheckTools`（または `:checkhealth nvim_tools`）を実行すると、
+外部ツールの用途・導入状況・検出パスを表示します。
+手動導入するもの、機能を使う場合だけ必要なもの、Mason 管理のものに分けています。
+インストールは行いません。
+
+プラグイン導入前や通常起動できない場合は、このディレクトリで次を実行できます。
+Neovim 自体は先にインストールしてください。
+
+```sh
+nvim --headless -u NONE -i NONE -l scripts/check-tools.lua
+```
+
+基本的な対象は `git`、`zsh`、`rg`（ripgrep）、`make`、`cc`（C コンパイラ）、
+`curl` または `wget`、`tar`、`gzip`、`unzip`、`node`、`npm` です。
+クリップボードは現在 `xsel`（X11）に固定されているため、Wayland/macOS では
+`lua/options.lua` のクリップボード設定も変更してください。
+アイコンには端末側の Nerd Font、MarkdownPreview にはブラウザが必要です。
+
+一覧は `lua/nvim_tools/init.lua` で管理しています（設定の自動解析ではありません）。
+外部依存を変更したときは一覧も更新してください。
+チェックは実行ファイルの存在を調べるもので、バージョンや動作までは保証しません。
+
+## Neovim Keybindings
 
 This file documents all the keybindings configured in this Neovim setup. They are grouped by configuration file and plugin.
 
