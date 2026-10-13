@@ -54,6 +54,8 @@ ls.add_snippets("cpp", {
             "template<typename T> bool chmax(T& a, const T& b){ return a < b ? a = b, 1 : 0; }",
             "template<typename T, typename U> bool chmin(T& a, const U& b){ return a > b ? a = b, 1 : 0; }",
             "template<typename T, typename U> bool chmax(T& a, const U& b){ return a < b ? a = b, 1 : 0; }",
+            "template<class... T> void inc(T&... vars) { (++vars, ...); }",
+            "template<class... T> void dec(T&... vars) { (--vars, ...); }",
             "void YN(bool b) { cout << (b ? \"YES\" : \"NO\") << endl; }",
             "void Yn(bool b) { cout << (b ? \"Yes\" : \"No\") << endl; }",
             "void yn(bool b) { cout << (b ? \"yes\" : \"no\") << endl; }",
