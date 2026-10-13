@@ -47,6 +47,12 @@ vim.keymap.set("n", "cpal", ":%y<CR>", { desc = "Copy All" }) -- copy all
 -- 全削除
 vim.keymap.set("n", "clr", ":%d<CR>", { desc = "Clear All" }) -- clear
 
+-- 上書きペースト
+vim.keymap.set("n", "gp", "ggVGp", { desc = "Paste All Text" })
+
+-- ハイライトを削除
+vim.keymap.set("n", "<Esc>", ":noh<CR>", { desc = "Clear search highlight" })
+
 -- :terminalのときにEscを押すとNormal modeに戻る
 vim.keymap.set('t', '<Esc>', [[<C-\><C-n>]])
 
