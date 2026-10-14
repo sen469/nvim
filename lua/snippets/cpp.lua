@@ -6,7 +6,7 @@ local fmt = require("luasnip.extras.fmt").fmt
 local events = require("luasnip.util.events")
 
 ls.add_snippets("cpp", {
-	s("kr", { t({
+    s("kr", { t({
             "// #include <atcoder/all>",
             "// using namespace atcoder;",
             "// #include \"all\"",
@@ -54,8 +54,10 @@ ls.add_snippets("cpp", {
             "template<typename T> bool chmax(T& a, const T& b){ return a < b ? a = b, 1 : 0; }",
             "template<typename T, typename U> bool chmin(T& a, const U& b){ return a > b ? a = b, 1 : 0; }",
             "template<typename T, typename U> bool chmax(T& a, const U& b){ return a < b ? a = b, 1 : 0; }",
-            "template<class... T> void inc(T&... vars) { (++vars, ...); }",
-            "template<class... T> void dec(T&... vars) { (--vars, ...); }",
+            "template<class T> void inc1(T& x) { if constexpr (is_arithmetic_v<T>) ++x; else for (auto& y : x) inc1(y); }",
+            "template<class T> void dec1(T& x) { if constexpr (is_arithmetic_v<T>) --x; else for (auto& y : x) dec1(y); }",
+            "template<class... T> void inc(T&... vars) { (inc1(vars), ...); }",
+            "template<class... T> void dec(T&... vars) { (dec1(vars), ...); }",
             "void YN(bool b) { cout << (b ? \"YES\" : \"NO\") << endl; }",
             "void Yn(bool b) { cout << (b ? \"Yes\" : \"No\") << endl; }",
             "void yn(bool b) { cout << (b ? \"yes\" : \"no\") << endl; }",
@@ -64,15 +66,13 @@ ls.add_snippets("cpp", {
             "template <typename T, typename... Args>",
             "auto make_vec(size_t n, Args... args) { return (std::vector<decltype(make_vec<T>(args...))>(n, make_vec<T>(args...))); }",
             "template<typename T>",
-            "istream &operator>>(istream &is, vec<T> &v)",
-            "{",
+            "istream &operator>>(istream &is, vec<T> &v) {",
             "\tfor (int i = 0; i < (int)v.size(); i++)",
             "\t\tis >> v[i];",
             "\treturn (is);",
             "}",
             "template<typename T>",
-            "ostream &operator<<(ostream &os, vec<T> &v)",
-            "{",
+            "ostream &operator<<(ostream &os, vec<T> &v) {",
             "\tfor (int i = 0; i < (int)v.size(); i++)",
             "\t\tos << v[i] << (i == (int)v.size() - 1 ? \"\" : \" \");",
             "\treturn (os);",
