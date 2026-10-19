@@ -59,6 +59,8 @@ return {
             -Wno-bool-conversion
             -I/Users/sen46/my/kyopro/
             -I/Users/sen46/my/kyopro/lib
+            -I/Users/sen46/src/github.com/sen469/kyopro-library/
+            -I/Users/sen46/src/github.com/sen469/kyopro-library/lib
             -Wshadow
           ]]
           local f = io.open(clangd_config_file, "w")
