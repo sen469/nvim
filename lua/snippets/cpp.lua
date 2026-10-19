@@ -13,7 +13,7 @@ ls.add_snippets("cpp", {
             "// using namespace kyopro;",
             "// 998244353 1000000007 2147483647 4294967295 9223372036854775807 18446744073709551615",
             "#ifdef SEN469",
-            "#include \"debug/debug.hpp\"",
+            "#include \"debug/all\"",
             "#else",
             "#define dg(...)",
             "#endif",
