@@ -16,6 +16,7 @@ ls.add_snippets("cpp", {
             "#include \"debug/all\"",
             "#else",
             "#define dg(...)",
+            "#define DG_FIELDS(...)",
             "#endif",
             "#include <bits/stdc++.h>",
             "using namespace std;",
