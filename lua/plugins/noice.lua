@@ -3,6 +3,7 @@ return {
   event = "VeryLazy",
   opts = {
     lsp = {
+      hover = { enabled = false }, -- K の枠設定を Neovim 標準の hover に適用する
       progress = {
         enabled = false, -- LSP進捗表示を無効化して通知欄をスッキリさせる
       },
@@ -19,9 +20,18 @@ return {
       command_palette = false,       -- 中央表示を無効化して下に寄せる（小さく見せるため）
       long_message_to_split = true, -- long messages will be sent to a split
       inc_rename = false,           -- enables an input dialog for inc-rename.nvim
-      lsp_doc_border = false,       -- add a border to hover docs and signature help
+      lsp_doc_border = true,        -- add a border to hover docs and signature help
     },
     views = {
+      hover = {
+        border = {
+          style = "rounded",
+          padding = { 0, 1 },
+        },
+        win_options = {
+          winhighlight = { FloatBorder = "DiagnosticInfo" },
+        },
+      },
       cmdline_popup = {
         position = {
           row = "90%", -- 下部に配置

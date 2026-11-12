@@ -57,7 +57,7 @@ return {
       -- ホバーウィンドウで変数の中身をチェックできる
       vim.keymap.set("n", "K", function()
         local widgets = require("dap.ui.widgets")
-        widgets.hover()
+        widgets.hover(nil, { border = "rounded" })
       end, { desc = "DAP hover" })
     end,
   },

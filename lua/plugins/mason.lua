@@ -19,7 +19,9 @@ return {
       local opts = { noremap = true, silent = true, buffer = bufnr }
       vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
       vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
-      vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+      vim.keymap.set("n", "K", function()
+        vim.lsp.buf.hover({ border = "rounded", max_width = 80 })
+      end, opts)
       vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
     end
 
@@ -119,19 +121,9 @@ return {
       severity_sort = true,
     })
 
-    -- Hover ウィンドウの見た目
-    vim.lsp.handlers["textDocument/hover"] = function(err, result, ctx, config)
-      return vim.lsp.handlers.hover(
-        err,
-        result,
-        ctx,
-        vim.tbl_extend("force", config or {}, { border = "rounded", max_width = 80 })
-      )
-    end
-
     -- ポップアップメニューの配色
     vim.cmd('highlight link Pmenu Normal')
     vim.api.nvim_set_hl(0, "NormalFloat", { link = "Normal" })
-    vim.api.nvim_set_hl(0, "FloatBorder", { link = "Comment" })
+    vim.api.nvim_set_hl(0, "FloatBorder", { link = "DiagnosticInfo" })
   end
 }
