@@ -103,7 +103,7 @@ return {
         local widgets = require("dap.ui.widgets")
         local cur_win = vim.api.nvim_get_current_win()
 
-        widgets.hover()
+        widgets.hover(nil, { border = "rounded" })
 
         local hover_win = vim.api.nvim_get_current_win()
         if hover_win ~= cur_win then

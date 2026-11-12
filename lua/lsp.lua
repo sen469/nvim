@@ -16,7 +16,9 @@ M.setup = function()
     end
     vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts("Go to Definition"))
     vim.keymap.set("n", "gr", vim.lsp.buf.references, opts("Show References"))
-    vim.keymap.set("n", "K", vim.lsp.buf.hover, opts("Show Hover Documentation"))
+    vim.keymap.set("n", "K", function()
+      vim.lsp.buf.hover({ border = "rounded", max_width = 80 })
+    end, opts("Show Hover Documentation"))
     vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts("Rename Symbol"))
   end
 
@@ -74,11 +76,6 @@ M.setup = function()
     severity_sort = true,
   })
 
-  -- ホバーウィンドウのデザイン
-  vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
-    vim.lsp.handlers.hover,
-    { border = "rounded", max_width = 80 }
-  )
 end
 
 return M
